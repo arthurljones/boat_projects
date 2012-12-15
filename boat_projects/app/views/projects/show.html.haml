@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @project.name
+%p
+  %b Description:
+  = @project.description
+%p
+  %b Hours estimate:
+  = @project.hours_estimate
+%p
+  %b Notes:
+  = @project.notes
+%p
+  %b Helpers needed:
+  = @project.helpers_needed
+%p
+  %b Liveabord priority:
+  = @project.liveabord_priority
+%p
+  %b Daysail priority:
+  = @project.daysail_priority
+%p
+  %b Cruising priority:
+  = @project.cruising_priority
+%p
+  %b Completed:
+  = @project.completed
+%p
+  %b Obsolete:
+  = @project.obsolete
+
+= link_to 'Edit', edit_project_path(@project)
+\|
+= link_to 'Back', projects_path

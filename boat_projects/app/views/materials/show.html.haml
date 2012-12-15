@@ -1,0 +1,39 @@
+%p#notice= notice
+
+%p
+  %b Type:
+  = @material.type
+%p
+  %b Description:
+  = @material.description
+%p
+  %b Dimensions:
+  = @material.dimensions
+%p
+  %b Material:
+  = @material.material
+%p
+  %b Units:
+  = @material.units
+%p
+  %b Inventory:
+  = @material.inventory
+%p
+  %b Price:
+  = @material.price
+%p
+  %b Minimum purchase:
+  = @material.minimum_purchase
+%p
+  %b Package count:
+  = @material.package_count
+%p
+  %b Shipping price:
+  = @material.shipping_price
+%p
+  %b Location:
+  = @material.location
+
+= link_to 'Edit', edit_material_path(@material)
+\|
+= link_to 'Back', materials_path

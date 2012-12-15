@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @service.name
+%p
+  %b Description:
+  = @service.description
+%p
+  %b Price:
+  = @service.price
+%p
+  %b Provider:
+  = @service.provider
+%p
+  %b Phone:
+  = @service.phone
+%p
+  %b Email:
+  = @service.email
+%p
+  %b Website:
+  = @service.website
+
+= link_to 'Edit', edit_service_path(@service)
+\|
+= link_to 'Back', services_path

@@ -1,0 +1,37 @@
+%h1 Listing projects
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th Hours estimate
+    %th Notes
+    %th Helpers needed
+    %th Liveabord priority
+    %th Daysail priority
+    %th Cruising priority
+    %th Completed
+    %th Obsolete
+    %th
+    %th
+    %th
+
+  - @projects.each do |project|
+    %tr
+      %td= project.name
+      %td= project.description
+      %td= project.hours_estimate
+      %td= project.notes
+      %td= project.helpers_needed
+      %td= project.liveabord_priority
+      %td= project.daysail_priority
+      %td= project.cruising_priority
+      %td= project.completed
+      %td= project.obsolete
+      %td= link_to 'Show', project
+      %td= link_to 'Edit', edit_project_path(project)
+      %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Project', new_project_path

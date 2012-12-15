@@ -1,0 +1,43 @@
+= form_for @material do |f|
+  - if @material.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@material.errors.count, "error")} prohibited this material from being saved:"
+      %ul
+        - @material.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :type
+    = f.text_field :type
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :dimensions
+    = f.text_field :dimensions
+  .field
+    = f.label :material
+    = f.text_field :material
+  .field
+    = f.label :units
+    = f.text_field :units
+  .field
+    = f.label :inventory
+    = f.text_field :inventory
+  .field
+    = f.label :price
+    = f.text_field :price
+  .field
+    = f.label :minimum_purchase
+    = f.text_field :minimum_purchase
+  .field
+    = f.label :package_count
+    = f.text_field :package_count
+  .field
+    = f.label :shipping_price
+    = f.text_field :shipping_price
+  .field
+    = f.label :location
+    = f.text_field :location
+  .actions
+    = f.submit 'Save'

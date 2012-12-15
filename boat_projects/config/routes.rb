@@ -1,4 +1,10 @@
 BoatProjects::Application.routes.draw do
+  resources :projects
+
+  resources :services
+
+  resources :materials
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
