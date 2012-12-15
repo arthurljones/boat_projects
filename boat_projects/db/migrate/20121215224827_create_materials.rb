@@ -8,8 +8,8 @@ class CreateMaterials < ActiveRecord::Migration
       t.string :units
       t.decimal :inventory
       t.decimal :price
-      t.int :minimum_purchase
-      t.int :package_count
+      t.integer :minimum_purchase
+      t.integer :package_count
       t.decimal :shipping_price
       t.string :location
 

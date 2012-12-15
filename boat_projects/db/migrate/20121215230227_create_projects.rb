@@ -5,10 +5,10 @@ class CreateProjects < ActiveRecord::Migration
       t.string :description
       t.decimal :hours_estimate
       t.string :notes
-      t.int :helpers_needed
-      t.int :liveabord_priority
-      t.int :daysail_priority
-      t.int :cruising_priority
+      t.integer :helpers_needed
+      t.integer :liveabord_priority
+      t.integer :daysail_priority
+      t.integer :cruising_priority
       t.boolean :completed
       t.boolean :obsolete
 
