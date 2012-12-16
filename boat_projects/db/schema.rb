@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216013608) do
+ActiveRecord::Schema.define(:version => 20121216015247) do
 
   create_table "materials", :force => true do |t|
     t.string   "category"
@@ -19,11 +19,11 @@ ActiveRecord::Schema.define(:version => 20121216013608) do
     t.string   "dimensions"
     t.string   "material"
     t.string   "units"
-    t.decimal  "inventory",        :precision => 10, :scale => 0
-    t.decimal  "price",            :precision => 10, :scale => 0
+    t.decimal  "inventory",        :precision => 10, :scale => 2
+    t.decimal  "price",            :precision => 10, :scale => 2
     t.integer  "minimum_purchase"
     t.integer  "package_count"
-    t.decimal  "shipping_price",   :precision => 10, :scale => 0
+    t.decimal  "shipping_price",   :precision => 10, :scale => 2
     t.string   "location"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
@@ -32,19 +32,19 @@ ActiveRecord::Schema.define(:version => 20121216013608) do
   create_table "project_materials", :force => true do |t|
     t.integer "project_id"
     t.integer "material_id"
-    t.decimal "quantity",    :precision => 10, :scale => 0
+    t.decimal "quantity",    :precision => 10, :scale => 2
   end
 
   create_table "project_services", :force => true do |t|
     t.integer "project_id"
     t.integer "service_id"
-    t.decimal "quantity",   :precision => 10, :scale => 0
+    t.decimal "quantity",   :precision => 10, :scale => 2
   end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.decimal  "hours_estimate",      :precision => 10, :scale => 0
+    t.decimal  "hours_estimate",      :precision => 10, :scale => 2
     t.string   "notes"
     t.integer  "helpers_needed"
     t.integer  "liveaboard_priority"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20121216013608) do
   create_table "services", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.decimal  "price",       :precision => 10, :scale => 0
+    t.decimal  "price",       :precision => 10, :scale => 2
     t.string   "provider"
     t.string   "phone"
     t.string   "email"
