@@ -3,4 +3,28 @@ class Material < ActiveRecord::Base
 
   has_many :project_materials
   has_many :projects, :through => :project_materials
+
+  def name
+
+  	name = ""
+
+  	name << category unless category.blank?
+  	name << ", #{description}" unless description.blank?
+  	name << ", #{dimensions}" unless dimensions.blank?
+  	name << " (#{material})" unless material.blank?
+  	name << " #{toCurrency price + shipping_price}/#{units}"
+  	name << ", #{stripZeroes minimum_purchase}" unless minimum_purchase.blank? or minimum_purchase <= 1
+  	name << ", #{stripZeroes inventory} avail" unless inventory.blank? or inventory <= 0
+
+  	return name
+  end
+
+  private
+  def stripZeroes(number)
+  	ActionController::Base.helpers.number_with_precision number, :strip_insignificant_zeros => true
+  end
+
+  def toCurrency(number)
+  	ActionController::Base.helpers.number_to_currency number
+  end
 end

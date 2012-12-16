@@ -21,6 +21,7 @@
     .navbar.navbar-fluid-top
       .navbar-inner
         .container-fluid
+        .span6.offset3
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
             %span.icon-bar
             %span.icon-bar
@@ -28,21 +29,12 @@
           %a.brand(href="#") BoatProjects
           .container.nav-collapse
             %ul.nav
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+              %li= link_to "Projects", projects_path
+              %li= link_to "Materials", materials_path
 
     .container-fluid
-
       .row-fluid
-        .span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
-        .span9
+        .span6.offset3
           = yield
     
       %footer
