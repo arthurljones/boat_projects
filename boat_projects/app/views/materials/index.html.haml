@@ -5,7 +5,7 @@
   %thead
     %tr
       %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:type)
+      %th= model_class.human_attribute_name(:category)
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:dimensions)
       %th= model_class.human_attribute_name(:material)
@@ -21,7 +21,7 @@
     - @materials.each do |material|
       %tr
         %td= link_to material.id, material_path(material)
-        %td= material.type
+        %td= material.category
         %td= material.description
         %td= material.dimensions
         %td= material.material

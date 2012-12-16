@@ -18,7 +18,7 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test "should create project" do
     assert_difference('Project.count') do
-      post :create, project: { completed: @project.completed, cruising_priority: @project.cruising_priority, daysail_priority: @project.daysail_priority, description: @project.description, helpers_needed: @project.helpers_needed, hours_estimate: @project.hours_estimate, liveabord_priority: @project.liveabord_priority, name: @project.name, notes: @project.notes, obsolete: @project.obsolete }
+      post :create, project: { completed: @project.completed, cruising_priority: @project.cruising_priority, daysail_priority: @project.daysail_priority, description: @project.description, helpers_needed: @project.helpers_needed, hours_estimate: @project.hours_estimate, liveaboard_priority: @project.liveaboard_priority, name: @project.name, notes: @project.notes, obsolete: @project.obsolete }
     end
 
     assert_redirected_to project_path(assigns(:project))
@@ -35,7 +35,7 @@ class ProjectsControllerTest < ActionController::TestCase
   end
 
   test "should update project" do
-    put :update, id: @project, project: { completed: @project.completed, cruising_priority: @project.cruising_priority, daysail_priority: @project.daysail_priority, description: @project.description, helpers_needed: @project.helpers_needed, hours_estimate: @project.hours_estimate, liveabord_priority: @project.liveabord_priority, name: @project.name, notes: @project.notes, obsolete: @project.obsolete }
+    put :update, id: @project, project: { completed: @project.completed, cruising_priority: @project.cruising_priority, daysail_priority: @project.daysail_priority, description: @project.description, helpers_needed: @project.helpers_needed, hours_estimate: @project.hours_estimate, liveaboard_priority: @project.liveaboard_priority, name: @project.name, notes: @project.notes, obsolete: @project.obsolete }
     assert_redirected_to project_path(assigns(:project))
   end
 
