@@ -11,18 +11,15 @@
       %th= model_class.human_attribute_name(:liveaboard_priority)
       %th= model_class.human_attribute_name(:daysail_priority)
       %th= model_class.human_attribute_name(:cruising_priority)
-      %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @projects.each do |project|
       %tr
-        %td= link_to project.name, project_path(project)
+        %td= link_to project.name, edit_project_path(project)
         %td= project.description
         %td= project.hours_estimate
         %td= project.helpers_needed
         %td= project.liveaboard_priority
         %td= project.daysail_priority
         %td= project.cruising_priority
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini'
 
 = link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary'

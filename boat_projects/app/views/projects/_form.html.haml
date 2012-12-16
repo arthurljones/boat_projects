@@ -50,14 +50,14 @@
       %table.table.table-striped
         %thead
           %tr
-            %th= "Material"
-            %th= "Quantity"
-            %th= "Actions"
+            %th{:width => "80%"}= "Material"
+            %th{:width => "10%"}= "Quantity"
+            %th{:width => "10%"}= "Actions"
         %tbody
           = f.fields_for :project_materials do |material|
             %tr
-              %td= material.select :material_id, options_from_collection_for_select(Material.all, :id, :name, :selected => material.object.material_id) 
-              %td= material.text_field :quantity
+              %td= material.select :material_id, options_from_collection_for_select(Material.all, :id, :name, :selected => material.object.material_id), {:prompt => 'Select Material'}, {:class => "input-xxlarge"}
+              %td= material.text_field :quantity, :class => "input-mini"
               %td= f.link_to_remove "Remove"
   = f.link_to_add "Add a Material", :project_materials
   .form-actions
