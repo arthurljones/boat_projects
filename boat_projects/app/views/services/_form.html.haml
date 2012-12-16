@@ -1,31 +1,32 @@
-= form_for @service do |f|
-  - if @service.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@service.errors.count, "error")} prohibited this service from being saved:"
-      %ul
-        - @service.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :price
-    = f.text_field :price
-  .field
-    = f.label :provider
-    = f.text_field :provider
-  .field
-    = f.label :phone
-    = f.text_field :phone
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :website
-    = f.text_field :website
-  .actions
-    = f.submit 'Save'
+= form_for @service, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .control-group
+    = f.label :description, :class => 'control-label'
+    .controls
+      = f.text_field :description, :class => 'text_field'
+  .control-group
+    = f.label :price, :class => 'control-label'
+    .controls
+      = f.number_field :price, :class => 'number_field'
+  .control-group
+    = f.label :provider, :class => 'control-label'
+    .controls
+      = f.text_field :provider, :class => 'text_field'
+  .control-group
+    = f.label :phone, :class => 'control-label'
+    .controls
+      = f.text_field :phone, :class => 'text_field'
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.text_field :email, :class => 'text_field'
+  .control-group
+    = f.label :website, :class => 'control-label'
+    .controls
+      = f.text_field :website, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), services_path, :class => 'btn'

@@ -1,37 +1,39 @@
-%h1 Listing projects
-
-%table
-  %tr
-    %th Name
-    %th Description
-    %th Hours estimate
-    %th Notes
-    %th Helpers needed
-    %th Liveabord priority
-    %th Daysail priority
-    %th Cruising priority
-    %th Completed
-    %th Obsolete
-    %th
-    %th
-    %th
-
-  - @projects.each do |project|
+- model_class = Project
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
     %tr
-      %td= project.name
-      %td= project.description
-      %td= project.hours_estimate
-      %td= project.notes
-      %td= project.helpers_needed
-      %td= project.liveabord_priority
-      %td= project.daysail_priority
-      %td= project.cruising_priority
-      %td= project.completed
-      %td= project.obsolete
-      %td= link_to 'Show', project
-      %td= link_to 'Edit', edit_project_path(project)
-      %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:hours_estimate)
+      %th= model_class.human_attribute_name(:notes)
+      %th= model_class.human_attribute_name(:helpers_needed)
+      %th= model_class.human_attribute_name(:liveabord_priority)
+      %th= model_class.human_attribute_name(:daysail_priority)
+      %th= model_class.human_attribute_name(:cruising_priority)
+      %th= model_class.human_attribute_name(:completed)
+      %th= model_class.human_attribute_name(:obsolete)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @projects.each do |project|
+      %tr
+        %td= link_to project.id, project_path(project)
+        %td= project.name
+        %td= project.description
+        %td= project.hours_estimate
+        %td= project.notes
+        %td= project.helpers_needed
+        %td= project.liveabord_priority
+        %td= project.daysail_priority
+        %td= project.cruising_priority
+        %td= project.completed
+        %td= project.obsolete
+        %td=l project.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-%br
-
-= link_to 'New Project', new_project_path
+= link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary'

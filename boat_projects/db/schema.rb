@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215231114) do
+ActiveRecord::Schema.define(:version => 20121216002619) do
 
   create_table "materials", :force => true do |t|
     t.string   "type"
@@ -32,16 +32,16 @@ ActiveRecord::Schema.define(:version => 20121215231114) do
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.decimal  "hours_estimate",     :precision => 10, :scale => 0
+    t.decimal  "hours_estimate",      :precision => 10, :scale => 0
     t.string   "notes"
     t.integer  "helpers_needed"
-    t.integer  "liveabord_priority"
+    t.integer  "liveaboard_priority"
     t.integer  "daysail_priority"
     t.integer  "cruising_priority"
     t.boolean  "completed"
     t.boolean  "obsolete"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   create_table "projects_dependencies", :force => true do |t|

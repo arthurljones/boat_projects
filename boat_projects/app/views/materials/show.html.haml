@@ -1,39 +1,49 @@
-%p#notice= notice
+- model_class = Material
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
 
 %p
-  %b Type:
+  %strong= model_class.human_attribute_name(:type) + ':'
+  %br
   = @material.type
 %p
-  %b Description:
+  %strong= model_class.human_attribute_name(:description) + ':'
+  %br
   = @material.description
 %p
-  %b Dimensions:
+  %strong= model_class.human_attribute_name(:dimensions) + ':'
+  %br
   = @material.dimensions
 %p
-  %b Material:
+  %strong= model_class.human_attribute_name(:material) + ':'
+  %br
   = @material.material
 %p
-  %b Units:
+  %strong= model_class.human_attribute_name(:units) + ':'
+  %br
   = @material.units
 %p
-  %b Inventory:
+  %strong= model_class.human_attribute_name(:inventory) + ':'
+  %br
   = @material.inventory
 %p
-  %b Price:
+  %strong= model_class.human_attribute_name(:price) + ':'
+  %br
   = @material.price
 %p
-  %b Minimum purchase:
+  %strong= model_class.human_attribute_name(:minimum_purchase) + ':'
+  %br
   = @material.minimum_purchase
 %p
-  %b Package count:
-  = @material.package_count
-%p
-  %b Shipping price:
+  %strong= model_class.human_attribute_name(:shipping_price) + ':'
+  %br
   = @material.shipping_price
 %p
-  %b Location:
+  %strong= model_class.human_attribute_name(:location) + ':'
+  %br
   = @material.location
 
-= link_to 'Edit', edit_material_path(@material)
-\|
-= link_to 'Back', materials_path
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), materials_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_material_path(@material), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), material_path(@material), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

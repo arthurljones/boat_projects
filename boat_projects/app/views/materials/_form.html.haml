@@ -1,43 +1,44 @@
-= form_for @material do |f|
-  - if @material.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@material.errors.count, "error")} prohibited this material from being saved:"
-      %ul
-        - @material.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :type
-    = f.text_field :type
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :dimensions
-    = f.text_field :dimensions
-  .field
-    = f.label :material
-    = f.text_field :material
-  .field
-    = f.label :units
-    = f.text_field :units
-  .field
-    = f.label :inventory
-    = f.text_field :inventory
-  .field
-    = f.label :price
-    = f.text_field :price
-  .field
-    = f.label :minimum_purchase
-    = f.text_field :minimum_purchase
-  .field
-    = f.label :package_count
-    = f.text_field :package_count
-  .field
-    = f.label :shipping_price
-    = f.text_field :shipping_price
-  .field
-    = f.label :location
-    = f.text_field :location
-  .actions
-    = f.submit 'Save'
+= form_for @material, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :type, :class => 'control-label'
+    .controls
+      = f.text_field :type, :class => 'text_field'
+  .control-group
+    = f.label :description, :class => 'control-label'
+    .controls
+      = f.text_field :description, :class => 'text_field'
+  .control-group
+    = f.label :dimensions, :class => 'control-label'
+    .controls
+      = f.text_field :dimensions, :class => 'text_field'
+  .control-group
+    = f.label :material, :class => 'control-label'
+    .controls
+      = f.text_field :material, :class => 'text_field'
+  .control-group
+    = f.label :units, :class => 'control-label'
+    .controls
+      = f.text_field :units, :class => 'text_field'
+  .control-group
+    = f.label :inventory, :class => 'control-label'
+    .controls
+      = f.number_field :inventory, :class => 'number_field'
+  .control-group
+    = f.label :price, :class => 'control-label'
+    .controls
+      = f.number_field :price, :class => 'number_field'
+  .control-group
+    = f.label :minimum_purchase, :class => 'control-label'
+    .controls
+      = f.number_field :minimum_purchase, :class => 'number_field'
+  .control-group
+    = f.label :shipping_price, :class => 'control-label'
+    .controls
+      = f.number_field :shipping_price, :class => 'number_field'
+  .control-group
+    = f.label :location, :class => 'control-label'
+    .controls
+      = f.text_field :location, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), materials_path, :class => 'btn'

@@ -12,6 +12,7 @@ gem 'json'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'foreigner'
+gem 'awesome_print'
 
 group :development do
 	gem 'haml-rails'
