@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216005220) do
+ActiveRecord::Schema.define(:version => 20121216013608) do
 
   create_table "materials", :force => true do |t|
     t.string   "category"
@@ -27,6 +27,18 @@ ActiveRecord::Schema.define(:version => 20121216005220) do
     t.string   "location"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
+  end
+
+  create_table "project_materials", :force => true do |t|
+    t.integer "project_id"
+    t.integer "material_id"
+    t.decimal "quantity",    :precision => 10, :scale => 0
+  end
+
+  create_table "project_services", :force => true do |t|
+    t.integer "project_id"
+    t.integer "service_id"
+    t.decimal "quantity",   :precision => 10, :scale => 0
   end
 
   create_table "projects", :force => true do |t|
@@ -47,18 +59,6 @@ ActiveRecord::Schema.define(:version => 20121216005220) do
   create_table "projects_dependencies", :force => true do |t|
     t.integer "project_id"
     t.integer "dependency_id"
-  end
-
-  create_table "projects_materials", :force => true do |t|
-    t.integer "project_id"
-    t.integer "material_id"
-    t.decimal "quantity",    :precision => 10, :scale => 0
-  end
-
-  create_table "projects_services", :force => true do |t|
-    t.integer "project_id"
-    t.integer "service_id"
-    t.decimal "quantity",   :precision => 10, :scale => 0
   end
 
   create_table "services", :force => true do |t|

@@ -1,4 +1,8 @@
 BoatProjects::Application.routes.draw do
+  resources :project_services
+
+  resources :project_materials
+
   resources :projects
 
   resources :services
