@@ -11,8 +11,10 @@ gem 'paperclip'
 gem 'json'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
+gem 'less-rails'
 gem 'foreigner'
 gem 'awesome_print'
+gem 'nested_form'
 
 group :development do
 	gem 'haml-rails'

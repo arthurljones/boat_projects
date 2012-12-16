@@ -7,4 +7,6 @@ class Project < ActiveRecord::Base
   has_many :services, :through => :project_services
   has_many :dependencies, :through => :projects_dependencies, :class_name => 'Project', :foreign_key => 'dependency_id'
 
+  default_scope where(:completed => false, :obsolete => false)
+
 end
