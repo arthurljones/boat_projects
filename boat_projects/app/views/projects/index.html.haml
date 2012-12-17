@@ -1,6 +1,7 @@
 - model_class = Project
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize
+="Total Cost: #{number_to_currency Project.total_cost}"
 %table.table.table-hover
   %thead
     %tr

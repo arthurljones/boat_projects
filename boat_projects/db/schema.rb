@@ -11,22 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216015247) do
+ActiveRecord::Schema.define(:version => 20121217064536) do
 
   create_table "materials", :force => true do |t|
-    t.string   "category"
-    t.string   "description"
-    t.string   "dimensions"
-    t.string   "material"
-    t.string   "units"
-    t.decimal  "inventory",        :precision => 10, :scale => 2
-    t.decimal  "price",            :precision => 10, :scale => 2
-    t.integer  "minimum_purchase"
-    t.integer  "package_count"
-    t.decimal  "shipping_price",   :precision => 10, :scale => 2
+    t.string   "category",                                        :default => ""
+    t.string   "description",                                     :default => ""
+    t.string   "dimensions",                                      :default => ""
+    t.string   "material",                                        :default => ""
+    t.string   "units",                                           :default => "Each"
+    t.decimal  "inventory",        :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "price",            :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "minimum_purchase",                                :default => 1
+    t.integer  "package_count",                                   :default => 1
+    t.decimal  "shipping_price",   :precision => 10, :scale => 2, :default => 0.0
     t.string   "location"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
   end
 
   create_table "project_materials", :force => true do |t|
@@ -42,18 +42,18 @@ ActiveRecord::Schema.define(:version => 20121216015247) do
   end
 
   create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.decimal  "hours_estimate",      :precision => 10, :scale => 2
-    t.string   "notes"
-    t.integer  "helpers_needed"
-    t.integer  "liveaboard_priority"
-    t.integer  "daysail_priority"
-    t.integer  "cruising_priority"
-    t.boolean  "completed"
-    t.boolean  "obsolete"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.string   "name",                                               :default => ""
+    t.string   "description",                                        :default => ""
+    t.decimal  "hours_estimate",      :precision => 10, :scale => 2, :default => 1.0
+    t.string   "notes",                                              :default => ""
+    t.integer  "helpers_needed",                                     :default => 0
+    t.integer  "liveaboard_priority",                                :default => 5
+    t.integer  "daysail_priority",                                   :default => 5
+    t.integer  "cruising_priority",                                  :default => 5
+    t.boolean  "completed",                                          :default => false
+    t.integer  "obsolete",                                           :default => 0
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
   end
 
   create_table "projects_dependencies", :force => true do |t|

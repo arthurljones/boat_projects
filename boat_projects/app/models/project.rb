@@ -21,4 +21,9 @@ class Project < ActiveRecord::Base
     return cost || 0
   end
 
+  def self.total_cost
+    cost = Project.all.map(&:cost).inject(:+)
+    return cost || 0
+  end
+
 end
