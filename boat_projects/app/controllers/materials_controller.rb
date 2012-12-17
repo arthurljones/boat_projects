@@ -1,12 +1,15 @@
 class MaterialsController < ApplicationController
   # GET /materials
   # GET /materials.json
-  def index
-    @materials = Material.all
+  def default_column
+    "category"
+  end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @materials }
+  def index
+    if params[:sort] == "total_price"
+      @materials = Material.order("price + shipping_price " + sort_direction)
+    else
+      @materials = Material.order(sort_column(Material) + " " + sort_direction)
     end
   end
 
@@ -44,11 +47,9 @@ class MaterialsController < ApplicationController
 
     respond_to do |format|
       if @material.save
-        format.html { redirect_to @material, notice: 'Material was successfully created.' }
-        format.json { render json: @material, status: :created, location: @material }
+        format.html { redirect_to edit_material_path(@material), notice: 'Material was successfully created.' }
       else
         format.html { render action: "new" }
-        format.json { render json: @material.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,11 +61,9 @@ class MaterialsController < ApplicationController
 
     respond_to do |format|
       if @material.update_attributes(params[:material])
-        format.html { redirect_to @material, notice: 'Material was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to edit_material_path(@material), notice: 'Material was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @material.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -79,5 +78,15 @@ class MaterialsController < ApplicationController
       format.html { redirect_to materials_url }
       format.json { head :no_content }
     end
+  end  
+
+  private
+  def sort_column(model_class)
+    if params[:sort] == "total_price"
+      return "total_price" 
+    else 
+      return super
+    end
   end
+
 end

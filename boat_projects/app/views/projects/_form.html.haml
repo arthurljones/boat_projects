@@ -61,7 +61,7 @@
                 - if material.object.material_id.present?
                   =link_to edit_material_path(material.object.material_id) do
                     %i{:class=>"icon-hand-right"}
-                  =material.select :material_id, options_from_collection_for_select(Material.all.sort_by { |e| e.name }, :id, :name, :selected => material.object.material_id), {:prompt => 'Select Material'}, {:class => "input-xxlarge"}
+                =material.select :material_id, options_from_collection_for_select(Material.all.sort_by { |e| e.name }, :id, :name, :selected => material.object.material_id), {:prompt => 'Select Material'}, {:class => "input-xxlarge"}
                 
               %td= material.text_field :quantity, :class => "input-mini"
               %td= number_to_currency(material.object.cost)

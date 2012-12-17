@@ -3,8 +3,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :sort_column, :sort_direction
 
+  def default_column
+  	"name"
+  end
+
   def sort_column(model_class)
-    model_class.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    model_class.column_names.include?(params[:sort]) ? params[:sort] : default_column
   end
   
   def sort_direction

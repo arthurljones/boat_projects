@@ -4,23 +4,22 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:category)
-      %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:dimensions)
-      %th= model_class.human_attribute_name(:material)
-      %th= model_class.human_attribute_name(:units)
-      %th= model_class.human_attribute_name(:inventory)
-      %th=t '.actions', :default => t("helpers.actions")
+      %th= sortable model_class, :category
+      %th= sortable model_class, :description
+      %th= sortable model_class, :dimensions
+      %th= sortable model_class, :material
+      %th= sortable model_class, :total_price
+      %th= sortable model_class, :units
+      %th= sortable model_class, :inventory
   %tbody
     - @materials.each do |material|
       %tr
-        %td= link_to material.category, material_path(material)
+        %td= link_to material.category, edit_material_path(material)
         %td= material.description
         %td= material.dimensions
         %td= material.material
+        %td= number_to_currency(material.price + material.shipping_price)
         %td= material.units
-        %td= material.inventory
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_material_path(material), :class => 'btn btn-mini'
+        %td= number_with_precision material.inventory, :strip_insignificant_zeros => true
 
 = link_to t('.new', :default => t("helpers.links.new")), new_material_path, :class => 'btn btn-primary'
