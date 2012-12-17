@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
-  attr_accessible :completed, :cruising_priority, :daysail_priority, :description, :helpers_needed, :hours_estimate, :liveaboard_priority, :name, :notes, :obsolete
+  attr_accessible :completed, :cruising_priority, :daysail_priority, :description, :helpers_needed, :hours_estimate, :liveaboard_priority, :name, :notes, :obsolete, :_destroy 
+  attr_accessor :_destroy
 
   has_many :project_materials, :dependent => :destroy
   has_many :project_services, :dependent => :destroy
@@ -14,5 +15,10 @@ class Project < ActiveRecord::Base
 
   attr_accessible :project_services_attributes
   accepts_nested_attributes_for :project_services, :allow_destroy => true
+
+  def cost
+    cost = project_materials.map(&:cost).inject(:+)
+    return cost || 0
+  end
 
 end

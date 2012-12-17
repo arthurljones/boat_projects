@@ -13,7 +13,7 @@ class Material < ActiveRecord::Base
   	name << ", #{dimensions}" unless dimensions.blank?
   	name << " (#{material})" unless material.blank?
   	name << " #{toCurrency price + shipping_price}/#{units}"
-  	name << ", #{stripZeroes minimum_purchase}" unless minimum_purchase.blank? or minimum_purchase <= 1
+  	name << ", #{stripZeroes minimum_purchase} min" unless minimum_purchase.blank? or minimum_purchase <= 1
   	name << ", #{stripZeroes inventory} avail" unless inventory.blank? or inventory <= 0
 
   	return name

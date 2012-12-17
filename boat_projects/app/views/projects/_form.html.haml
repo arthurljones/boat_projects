@@ -50,14 +50,21 @@
       %table.table.table-striped
         %thead
           %tr
-            %th{:width => "80%"}= "Material"
+            %th{:width => "70%"}= "Material"
             %th{:width => "10%"}= "Quantity"
+            %th{:width => "10%"}= "Cost"
             %th{:width => "10%"}= "Actions"
         %tbody
           = f.fields_for :project_materials do |material|
             %tr
-              %td= material.select :material_id, options_from_collection_for_select(Material.all, :id, :name, :selected => material.object.material_id), {:prompt => 'Select Material'}, {:class => "input-xxlarge"}
+              %td
+                - if material.object.material_id.present?
+                  =link_to edit_material_path(material.object.material_id) do
+                    %i{:class=>"icon-hand-right"}
+                  =material.select :material_id, options_from_collection_for_select(Material.all.sort_by { |e| e.name }, :id, :name, :selected => material.object.material_id), {:prompt => 'Select Material'}, {:class => "input-xxlarge"}
+                
               %td= material.text_field :quantity, :class => "input-mini"
+              %td= number_to_currency(material.object.cost)
               %td= f.link_to_remove "Remove"
   = f.link_to_add "Add a Material", :project_materials
   .form-actions

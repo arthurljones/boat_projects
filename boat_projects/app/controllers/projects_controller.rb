@@ -2,13 +2,24 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+
+    if params[:sort] == "cost"
+      if params[:direction] == "asc"
+        @projects = Project.all.sort_by { |e| e.cost }
+      else
+        @projects = Project.all.sort_by { |e| -e.cost }
+      end
+    else
+      @projects = Project.order(sort_column(Project) + " " + sort_direction)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
     end
   end
+
+
 
   # GET /projects/1
   # GET /projects/1.json
@@ -80,4 +91,14 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def sort_column(model_class)
+    if params[:sort] == "cost"
+      return "cost" 
+    else 
+      return super
+    end
+  end
+
 end
