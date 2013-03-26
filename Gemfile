@@ -18,6 +18,7 @@ gem 'nested_form'
 gem "validates_existence", ">= 0.5.3"
 
 group :development do
+	gem 'mysql2psql'
 	gem 'haml-rails'
 	gem 'nifty-generators'
 end
