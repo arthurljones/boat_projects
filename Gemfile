@@ -5,8 +5,9 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
-gem 'activerecord-postgresql-adapter'
+#gem 'pg'
+gem 'postgres-pr'
+#gem 'activerecord-postgresql-adapter'
 gem 'haml'
 gem 'paperclip'
 gem 'json'
