@@ -5,8 +5,8 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#gem 'pg'
-gem 'postgres-pr'
+gem 'pg'#, '~> 0.11'
+#gem 'postgres-pr'
 #gem 'activerecord-postgresql-adapter'
 gem 'haml'
 gem 'paperclip'
@@ -20,7 +20,7 @@ gem 'nested_form'
 gem "validates_existence", ">= 0.5.3"
 
 group :development do
-	gem 'mysql2psql'
+	#gem 'mysql2psql'
 	gem 'haml-rails'
 	gem 'nifty-generators'
 end

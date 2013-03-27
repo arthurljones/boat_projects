@@ -5,4 +5,7 @@
 #   gem 'sqlite3'
 development:
   adapter: postgresql
+  host: localhost
   database: boat_projects
+  username: boat_projects
+  password: boat_projects
