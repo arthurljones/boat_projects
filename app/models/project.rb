@@ -8,13 +8,16 @@ class Project < ActiveRecord::Base
   has_many :services, :through => :project_services
   has_many :dependencies, :through => :projects_dependencies, :class_name => 'Project', :foreign_key => 'dependency_id'
 
-  default_scope where(:completed => false, :obsolete => false)
+  default_scope order("name asc")
+  scope :incomplete, where{(completed == false) & (obsolete == false)}
 
   attr_accessible :project_materials_attributes
   accepts_nested_attributes_for :project_materials, :allow_destroy => true
 
   attr_accessible :project_services_attributes
   accepts_nested_attributes_for :project_services, :allow_destroy => true
+
+  #sifter :cost { }
 
   def cost
     cost = project_materials.map(&:cost).inject(:+)

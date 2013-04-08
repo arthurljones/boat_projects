@@ -18,6 +18,7 @@ gem 'foreigner'
 gem 'awesome_print'
 gem 'nested_form'
 gem "validates_existence", ">= 0.5.3"
+gem "squeel"
 
 group :development do
 	#gem 'mysql2psql'

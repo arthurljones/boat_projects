@@ -2,15 +2,20 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    
+    [:direction, :sort].each { |param| session[param] = session[param] || params[param] }
 
-    if params[:sort] == "cost"
-      if params[:direction] == "asc"
+    sort_direction = session[:direction] == "asc" ? "asc" : "desc"
+    column = sort_column(Project)
+
+    if column == "cost"
+      if sort_direction == "asc"
         @projects = Project.all.sort_by { |e| e.cost }
       else
         @projects = Project.all.sort_by { |e| -e.cost }
       end
     else
-      @projects = Project.order(sort_column(Project) + " " + sort_direction)
+      @projects = Project.order("#{column} #{sort_direction}")
     end
 
     respond_to do |format|
@@ -90,7 +95,7 @@ class ProjectsController < ApplicationController
 
   private
   def sort_column(model_class)
-    if params[:sort] == "cost"
+    if session[:sort] == "cost"
       return "cost" 
     else 
       return super

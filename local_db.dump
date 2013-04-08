@@ -1,0 +1,786 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: materials_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE materials_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.materials_id_seq OWNER TO boat_projects;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: materials; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE materials (
+    id integer DEFAULT nextval('materials_id_seq'::regclass) NOT NULL,
+    category character varying(255) DEFAULT ''::character varying,
+    description character varying(255) DEFAULT ''::character varying,
+    dimensions character varying(255) DEFAULT ''::character varying,
+    material character varying(255) DEFAULT ''::character varying,
+    units character varying(255) DEFAULT 'Each'::character varying,
+    inventory numeric(10,2) DEFAULT 0.00,
+    price numeric(10,2) DEFAULT 0.00,
+    minimum_purchase integer DEFAULT 1,
+    package_count integer DEFAULT 1,
+    shipping_price numeric(10,2) DEFAULT 0.00,
+    location character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.materials OWNER TO boat_projects;
+
+--
+-- Name: project_materials_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE project_materials_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.project_materials_id_seq OWNER TO boat_projects;
+
+--
+-- Name: project_materials; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE project_materials (
+    id integer DEFAULT nextval('project_materials_id_seq'::regclass) NOT NULL,
+    project_id integer,
+    material_id integer,
+    quantity numeric(10,2)
+);
+
+
+ALTER TABLE public.project_materials OWNER TO boat_projects;
+
+--
+-- Name: project_services_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE project_services_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.project_services_id_seq OWNER TO boat_projects;
+
+--
+-- Name: project_services; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE project_services (
+    id integer DEFAULT nextval('project_services_id_seq'::regclass) NOT NULL,
+    project_id integer,
+    service_id integer,
+    quantity numeric(10,2)
+);
+
+
+ALTER TABLE public.project_services OWNER TO boat_projects;
+
+--
+-- Name: projects_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE projects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projects_id_seq OWNER TO boat_projects;
+
+--
+-- Name: projects; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE projects (
+    id integer DEFAULT nextval('projects_id_seq'::regclass) NOT NULL,
+    name character varying(255) DEFAULT ''::character varying,
+    description character varying(255) DEFAULT ''::character varying,
+    hours_estimate numeric(10,2) DEFAULT 1.00,
+    notes character varying(255) DEFAULT ''::character varying,
+    helpers_needed integer DEFAULT 0,
+    liveaboard_priority integer DEFAULT 5,
+    daysail_priority integer DEFAULT 5,
+    cruising_priority integer DEFAULT 5,
+    completed boolean DEFAULT false,
+    obsolete integer DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.projects OWNER TO boat_projects;
+
+--
+-- Name: projects_dependencies_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE projects_dependencies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projects_dependencies_id_seq OWNER TO boat_projects;
+
+--
+-- Name: projects_dependencies; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE projects_dependencies (
+    id integer DEFAULT nextval('projects_dependencies_id_seq'::regclass) NOT NULL,
+    project_id integer,
+    dependency_id integer
+);
+
+
+ALTER TABLE public.projects_dependencies OWNER TO boat_projects;
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO boat_projects;
+
+--
+-- Name: services_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE services_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.services_id_seq OWNER TO boat_projects;
+
+--
+-- Name: services; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE services (
+    id integer DEFAULT nextval('services_id_seq'::regclass) NOT NULL,
+    name character varying(255),
+    description character varying(255),
+    price numeric(10,2),
+    provider character varying(255),
+    phone character varying(255),
+    email character varying(255),
+    website character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.services OWNER TO boat_projects;
+
+--
+-- Data for Name: materials; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY materials (id, category, description, dimensions, material, units, inventory, price, minimum_purchase, package_count, shipping_price, location, created_at, updated_at) FROM stdin;
+1	Bolt	Philips Pan Head Machine Screw	1/4" x 1/2" 	Stainless	Each	0.00	0.09	100	100	0.02	http://www.jamestowndistributors.com/userportal/product.do?process=checkout&part=1027	2012-12-16 02:00:08	2012-12-16 02:00:08
+2	Cloth	Exterior Bag 	46"	Sunbrella	Yd.	0.00	16.00	1	1	0.00	http://search.sailrite.com/?refineType=1&sub_attr_name=Outdoor%20Application&refineValue=Bags&refine=1&history=wwxv0dxz||sub_attr_name~Store_ID^refineValue~Retail1...eknsjrio||categoryName~cat_121351%40Retail1^category~121368%40Retail1^subCategoryName~Mar	2012-12-16 02:00:08	2012-12-16 02:00:08
+3	Cloth	Zipper	48"	Plastic Teeth & Pull	Each	0.00	7.50	1	1	0.00	http://www.sailrite.com/YKK-Zipper-10-Black-48-Single-Locking-Plastic-Slider	2012-12-16 02:00:08	2012-12-16 02:00:08
+4	Tank	Fuel	12 gal.	Plastic	Each	0.00	165.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|311|302335|7364|939818|940755&id=940431	2012-12-16 02:00:08	2012-12-16 02:00:08
+5	Cloth	Fabric Mesh	48"	Polyester	Yd.	0.00	5.00	1	1	0.00	http://www.sailrite.com/Mesh-Polyester-White-46	2012-12-16 02:00:08	2012-12-16 02:00:08
+6	Tape	Butyl Sealant	1/2" x 1/8"	\N	Ft.	295.00	0.36	300	300	0.00	http://www.pbase.com/mainecruising/butyl_tape	2012-12-16 02:00:08	2012-12-16 02:00:08
+7	Engine Part	Transmission Cable 	10'	Teleflex 6400	Each	0.00	165.00	1	1	0.00	http://www.jamestowndistributors.com/userportal/show_product.do?pid=58310&familyName=Teleflex+TFXtreme+6400CC+Control+Cable	2012-12-16 02:00:08	2012-12-16 02:00:08
+9	Bolt	Philips Flat Head Machine Screw	1/4" x 2"	Stainless	Each	0.00	0.18	100	100	0.02	http://www.jamestowndistributors.com/userportal/show_product.do?pid=489&familyName=1%2F4-20+S%2FS+Machine+Screws+FP	2012-12-16 02:00:08	2012-12-16 02:00:08
+10	Washer	Fender	1/4" x 1 1/4"	Stainless	Each	0.00	0.15	100	100	0.02	http://www.jamestowndistributors.com/userportal/show_product.do?pid=1902&familyName=S%2FS+Fender+Washers	2012-12-16 02:00:08	2012-12-16 02:00:08
+11	Nut	Nylock	1/4"	Stainless	Each	0.00	0.14	100	100	0.02	http://www.jamestowndistributors.com/userportal/show_product.do?pid=1896&familyName=S%2FS+Lock+Nuts	2012-12-16 02:00:08	2012-12-16 02:00:08
+12	Epoxy	Epoxy and Hardener			Gal.	0.20	65.50	1	1	10.00	http://raka.com/epoxy_kits.html	2012-12-16 02:00:08	2013-01-02 23:42:35
+13	Nut	Eye	1/4" x 1 1/4"	Stainless	Each	0.00	5.00	1	1	0.00	http://www.jamestowndistributors.com/userportal/show_product.do?pid=57902&familyName=Eye+Nut+-+Stainless+Steel	2012-12-16 02:00:08	2012-12-16 02:00:08
+14	Hose	Sanitation	1 1/2"	\N	Ft.	21.00	3.80	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|315126&id=1581861	2012-12-16 02:00:08	2012-12-16 02:00:08
+15	Vent	Clamshell	5" x 4 1/2" x 2"	Stainless	Each	2.00	15.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|6880|45749|320599|845203&id=1816519	2012-12-16 02:00:08	2012-12-16 02:00:08
+16	Valve	Y-Valve	1 1/2" Barbs	\N	Each	1.00	56.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|813148|316446&id=121038	2012-12-16 02:00:08	2012-12-16 02:00:08
+17	Tank	Holding Tank Fitting Relocation Kit 	\N	\N	Each	0.00	50.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|87367|315193&id=134960	2012-12-16 02:00:08	2012-12-16 02:00:08
+18	Vent	Cowl	 3" Dia. 5" Tall	Plastic	Each	0.00	25.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|6880|45749|320599|845203&id=1120909	2012-12-16 02:00:08	2012-12-16 02:00:08
+19	Thru-Hull	Straight 	1 1/2"	Nylon	Each	2.00	16.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|315123|567957&id=1296993	2012-12-16 02:00:08	2012-12-16 02:00:08
+20	Tank	Holding Tank 90 Degree Adapter Kit 	\N	\N	Each	0.00	25.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|87367|315193&id=940159	2012-12-16 02:00:08	2012-12-16 02:00:08
+21	Sheeting	2 mil	8'4" (100' rolls)	Plastic	Ft.	0.00	0.35	1	1	0.00	http://www.homedepot.com/h_d1/N-5yc1v/R-202184039/h_d2/ProductDisplay?catalogId=10053&langId=-1&keyword=plastic%20sheeting&storeId=10051	2012-12-16 02:00:08	2012-12-16 02:00:08
+22	Lumber	Teak	1/2" x 2 1/2"	\N	Linear Ft.	0.00	7.10	1	1	0.00	http://marine-plywood.us/Boat-lumber-pricing.htm	2012-12-16 02:00:08	2012-12-16 02:00:08
+23	Lumber	Marine Plywood	18mm	\N	Sq. Ft.	0.00	3.22	32	32	0.00	http://www.worldpanel.com/proddetail.asp?prod=HydroCore	2012-12-16 02:00:08	2012-12-16 02:00:08
+24	Lumber	Marine Plywood	18mm	Teak & Holly Veneer	Sq. Ft.	0.00	6.90	32	32	0.00	http://www.worldpanel.com/products.asp?cat=9	2012-12-16 02:00:08	2012-12-16 02:00:08
+25	Fiberglass	Tape	8"	\N	Yd.	0.00	2.10	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|16458|309345&id=16667	2012-12-16 02:00:08	2012-12-16 02:00:08
+26	Fiberglass	Tape	3"	\N	Yd.	0.00	0.95	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|16458|309345&id=16491	2012-12-16 02:00:08	2012-12-16 02:00:08
+27	Rope	Single Braid	1/4"	Dyneema	Ft.	0.00	1.40	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|311417|314170|749705&id=1117343	2012-12-16 02:00:08	2012-12-16 02:00:08
+28	Life Line	Netting	\N	\N	Yd. As Installed	0.00	10.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|297400|1856400&id=363314	2012-12-16 02:00:08	2012-12-16 02:00:08
+29	Thimble	\N	1/4"	Nylon	Each	0.00	0.80	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|638271|296897&id=35360	2012-12-16 02:00:08	2012-12-16 02:00:08
+35	Engine Part	Choke Cable	20'	\N	Each	0.00	70.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&searchstart=120	2012-12-16 02:00:08	2012-12-16 02:00:08
+36	Rope	Double Braid Samson XL	7/16"	Polyester	Ft.	0.00	1.16	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|311417|314169|913347&id=1258724	2012-12-16 02:00:08	2012-12-16 02:00:08
+37	Thimble	\N	3/8" - 7/16"	Stainless	Each	0.00	6.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|638271|296897&id=34546	2012-12-16 02:00:08	2012-12-16 02:00:08
+38	Strap	Tank Strap	1" x 72"	\N	Each	0.00	8.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|311|302335|7364|1846261&id=1845192	2012-12-16 02:00:08	2012-12-16 02:00:08
+39	Tether	Retractable Safety Tether	1m - 2m	\N	Each	0.00	100.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|135|88189&id=1685857	2012-12-16 02:00:08	2012-12-16 02:00:08
+40	Life Line	Turnbuckle, Toggle and Eye 	\N	Stainless	Each	0.00	25.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|297400|312091&id=1256563	2012-12-16 02:00:08	2012-12-16 02:00:08
+42	Anchor	Manson Supreme	25 lb.	Galvanized Steel	Each	0.00	265.00	1	1	25.00	http://www.defender.com/product.jsp?path=-1|10391|33872|902122&id=901916	2012-12-16 02:00:08	2012-12-17 07:46:05
+43	Chain	BBB	5/16"	Galvanized Steel	Ft.	0.00	3.15	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+44	Chain	G4	5/16"	Galvanized Steel	Ft.	60.00	3.25	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+49	Windlass	Manual, Used		Bronze	Each	0.00	500.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-17 06:23:31
+50	Hose Clamp	Non-Perferated	1 1/2" - 2 1/2"	Stainless	Each	16.00	3.50	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|315124&id=169427	2012-12-16 02:00:08	2012-12-16 02:00:08
+51	Hose Clamp	Non-Perferated	1" - 1 1/2"	Stainless	Each	0.00	3.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|315124&id=169367	2012-12-16 02:00:08	2012-12-16 02:00:08
+52	Hose Clamp	Non-Perferated	3/4" - 1 1/8"	Stainless	Each	0.00	2.60	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|315124&id=169337	2012-12-16 02:00:08	2012-12-16 02:00:08
+53	Hose	Bilge Pump	3/4"	\N	Ft	10.00	1.30	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|315129&id=106835	2012-12-16 02:00:08	2012-12-16 02:00:08
+54	Thru-Hull	Straight	3/4"	Plastic	Each	0.00	5.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|367124&id=146726	2012-12-16 02:00:08	2012-12-16 02:00:08
+55	Screw	Wood Screw	#8 x 1"	Stainless	Each	20.00	0.12	100	100	0.00	http://www.jamestowndistributors.com/userportal/show_product.do?pid=1903&familyName=%238+S%2FS+Wood+Screws+FP	2012-12-16 02:00:08	2012-12-16 02:00:08
+56	Hawse Pipe	\N	\N	Stainless	Each	0.00	50.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|32295|322380&id=1501885	2012-12-16 02:00:08	2012-12-16 02:00:08
+58	Tape	Hatch Gasket	1/8" x 3/4" (7ft roll)	Vinyl	Ft.	0.00	1.00	7	7	0.00	http://www.defender.com/product.jsp?path=-1|6880|6881|311415&id=1576753	2012-12-16 02:00:08	2012-12-16 02:00:08
+59	Hinge	Cabinet 	\N	Stainless	Pair	0.00	7.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|311444|296159&id=25852	2012-12-16 02:00:08	2012-12-16 02:00:08
+60	Hinge	Door, Flush	\N	Stainless	Each	0.00	14.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|311444|296159&id=578335	2012-12-16 02:00:08	2012-12-16 02:00:08
+61	Hinge	Door, Heavy Duty	\N	Stainless	Pair	0.00	16.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|311444|296159&id=578235	2012-12-16 02:00:08	2012-12-16 02:00:08
+62	Pad Eye	\N	3 1/8" Base	Stainless	Each	0.00	40.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|311635|312081&id=117030	2012-12-16 02:00:08	2012-12-16 02:00:08
+63	Interior Light	Rope	4 segments x 1ft	LED	Set	0.00	30.00	1	1	0.00	http://www.ikea.com/us/en/catalog/products/20119418/	2012-12-16 02:00:08	2012-12-16 02:00:08
+64	Interior Light	Surface Mount Lamp	8", 7W	Fluorescent	Each	0.00	24.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|328876|1116026&id=1037931	2012-12-16 02:00:08	2012-12-16 02:00:08
+65	Interior Light	Surface Mount Lamp	\N	LED	Each	1.00	60.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|328876|1116026&id=1393763	2012-12-16 02:00:08	2012-12-16 02:00:08
+66	Interior Light	Surface Mount Lamp	10", 13W	Fluorescent	Each	0.00	26.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|328876|1116026&id=1037912	2012-12-16 02:00:08	2012-12-16 02:00:08
+67	Nav Light	Red & Green Bow Combo	 2.4W	LED	Each	0.00	43.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|739053|760451&id=984593	2012-12-16 02:00:08	2012-12-16 02:00:08
+68	Nav Light	White Stern	\N	LED	Each	0.00	50.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|295769|320397|528244&id=1465642	2012-12-16 02:00:08	2012-12-16 02:00:08
+69	Interior Light	Flexible Lamp Red/White	\N	LED	Each	0.00	43.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|739053|1067284&id=1210867	2012-12-16 02:00:08	2012-12-16 02:00:08
+70	Interior Light	Reading Lamp	10W	Halogen	Each	0.00	30.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|328876|1116023&id=1883570	2012-12-16 02:00:08	2012-12-16 02:00:08
+72	Nav Light	Steaming Lamp/Deck Flood Combo	\N	\N	Each	0.00	55.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|295769|320396|320404&id=64341	2012-12-16 02:00:08	2012-12-16 02:00:08
+73	Interior Light	Ceiling Lamp	\N	LED	Each	0.00	26.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|739053|760445&id=747487	2012-12-16 02:00:08	2012-12-16 02:00:08
+74	Window	Lexan Scraps	10 lb box	\N	Each	0.00	16.00	1	1	0.00	http://freckleface.com/shopsite_sc/store/html/product545.html	2012-12-16 02:00:08	2012-12-16 02:00:08
+77	Mirror	Fancy w/Teak Border	15" x 11"	\N	Each	0.00	49.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|406|302027|322430&id=101139	2012-12-16 02:00:08	2012-12-16 02:00:08
+78	Knotmeter	Signet Sensor Paddle Wheel Kit	\N	\N	Each	1.00	45.00	1	1	0.00	http://www.signetmarine.com/PRODUCTS/pricelist/comp_price3.html	2012-12-16 02:00:08	2012-12-16 02:00:08
+79	Compass	Richie Navigator Old Style Replacement Dome	\N	\N	Each	2.00	59.00	1	1	0.00	http://www.vikingcompass.com/ritoldnavpart.html	2012-12-16 02:00:08	2012-12-16 02:00:08
+80	Compass	Richie Navigator Old Style LED Light Kit	\N	\N	Each	0.00	24.00	1	1	0.00	http://www.vikingcompass.com/navoldlight.html	2012-12-16 02:00:08	2012-12-16 02:00:08
+81	Container	Fancy Waterproof Laptop Case	\N	\N	Each	0.00	190.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|344|760427&id=88038	2012-12-16 02:00:08	2012-12-16 02:00:08
+82	Log Book	Maintenance	\N	\N	Each	0.00	23.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|17|315035&id=339947	2012-12-16 02:00:08	2012-12-16 02:00:08
+83	Log Book	Cruising	\N	\N	Each	0.00	23.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|17|315035&id=83239	2012-12-16 02:00:08	2012-12-16 02:00:08
+84	Log Book	Ship's Log			Each	1.00	23.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|17|315035&id=83225	2012-12-16 02:00:08	2012-12-17 07:49:43
+85	Bulb	Festoon	\N	LED	Each	0.00	22.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|65136|296901|1249269&id=1645280	2012-12-16 02:00:08	2012-12-16 02:00:08
+86	Engine Part	Freshwater Engine Cooling Kit	\N	\N	Each	0.00	715.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=CFWK&keywords=all&template=Templates/B000_storebuilder.html	2012-12-16 02:00:08	2012-12-16 02:00:08
+87	Sail	Gennaker	\N	\N	Each	0.00	2000.00	1	1	0.00	North Sails	2012-12-16 02:00:08	2012-12-16 02:00:08
+88	Caulk	Sikaflex 291 Adhesive 	10.3 oz	\N	Tube	0.00	13.00	1	1	0.00	http://www.jamestowndistributors.com/userportal/show_product.do?pid=3512&familyName=Sikaflex+291	2012-12-16 02:00:08	2012-12-16 02:00:08
+89	Fastener	Snap Adhesive Base	\N	\N	Each	0.00	2.03	25	1	0.00	http://www.sailrite.com/YKK-SNAD-White-25mm-Adhesive-Backed-Flexible-Base-Stud	2012-12-16 02:00:08	2012-12-16 02:00:08
+90	Fastener	Snap Button	\N	\N	Each	0.00	0.23	25	1	0.00	http://www.sailrite.com/Snap-Fastener-Button-White-3-16-Barrel-Nickel-Key-A	2012-12-16 02:00:08	2012-12-16 02:00:08
+91	Fastener	Snap Socket	\N	\N	Each	0.00	0.18	25	1	0.00	http://www.sailrite.com/Snap-Fastener-Normal-Action-Socket-Stainless-Steel-Key-SSB	2012-12-16 02:00:08	2012-12-16 02:00:08
+92	Fastener	Snap Wood Screw Base	\N	\N	Each	0.00	0.32	25	1	0.00	http://www.sailrite.com/Snap-Fastener-Screw-Stud-3-8-Stainless-Steel-Key-SSE	2012-12-16 02:00:08	2012-12-16 02:00:08
+94	Bolt	Hex Cap Machine Screw	1/4" x 3/4"	Stainless	Each	3.00	0.14	100	100	0.02	http://jamestowndistributors.com/userportal/show_product.do?pid=2223&familyName=1%2F4-20+S%2FS+Hex+Caps	2012-12-16 02:00:08	2012-12-16 02:00:08
+95	Rope	Double Braid Samson XLS	7/16"	Polyester	Ft.	0.00	0.93	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|311417|314169|913347&id=36838	2012-12-16 02:00:08	2012-12-16 02:00:08
+96	Rope	Double Braid Samson XLS	3/8"	Polyester	Ft.	0.00	0.76	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|311417|314169|913347&id=36459	2012-12-16 02:00:08	2012-12-16 02:00:08
+97	Wire Rope	\N	1/4" 1x19	316 Stainless	Ft.	0.00	3.36	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|107602|297597&id=108067	2012-12-16 02:00:08	2012-12-16 02:00:08
+99	Wire Fitting	Swageless Stud	1/4" wire, 5/16" thread	316 Stainless	Each	0.00	37.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|107602|297595|312099&id=136088	2012-12-16 02:00:08	2012-12-16 02:00:08
+102	Wire Fitting	Turnbuckle, Jaw Only	1/2" pin, 5/16" thread	316 Stainless & Chromed Bronze	Each	0.00	74.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|107602|297402|823935&id=123904	2012-12-16 02:00:08	2012-12-16 02:00:08
+103	Zinc	Prop Shaft Donut	7/8"	Zinc	Each	0.00	13.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|299255|319700&id=1119292	2012-12-16 02:00:08	2012-12-16 02:00:08
+106	Bottom Paint	Hard Bottomkote Aqua	\N	\N	Gallon	0.00	120.00	1	1	20.00	http://www.defender.com/product.jsp?path=-1|10918|296162|11000|311496|368288|1183523&id=1833976&cartId=3190162	2012-12-16 02:00:08	2012-12-16 02:00:08
+107	Bottom Paint	Ablative ACT	\N	\N	Gallon	0.00	113.00	1	1	20.00	http://www.defender.com/product.jsp?path=-1|10918|296162|11000|311496|368287&id=730074	2012-12-16 02:00:08	2012-12-16 02:00:08
+108	Tool	Snap Fastener Anvil	\N	\N	Each	0.00	30.00	1	1	0.00	http://www.sailrite.com/snap-fastener-deluxe-installation-tool	2012-12-16 02:00:08	2012-12-16 02:00:08
+109	Tool	Fabric Hole Punch	\N	\N	Each	0.00	15.00	1	1	0.00	http://www.amazon.com/SE-Professional-Leather-Punch-Plier/dp/B0007MX288/ref=sr_1_2?ie=UTF8&qid=1331349708&sr=8-2	2012-12-16 02:00:08	2012-12-16 02:00:08
+110	Tool	Harness Rescue Combo	\N	\N	Each	0.00	16.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|135|88189&id=1590660	2012-12-16 02:00:08	2012-12-16 02:00:08
+112	Snap Hook	\N	5/16"	Stainless	Each	0.00	24.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|2186|312065&id=125740	2012-12-16 02:00:08	2012-12-16 02:00:08
+114	Saftey	Emergency Ladder	\N	\N	Each	0.00	33.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|109363&id=1343784	2012-12-16 02:00:08	2012-12-16 02:00:08
+115	Rope	Three Strand	1/2"	Nylon	Ft.	0.00	0.62	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|311417|35699&id=36180	2012-12-16 02:00:08	2012-12-16 02:00:08
+116	Coveralls	Disposable w/Hood	Large	\N	Each	0.00	3.35	12	12	0.00	http://www.amazon.com/Magid-EconoWear-Polypropylene-Disposable-Coverall/dp/B004OEJIE2/ref=sr_1_2?s=industrial&ie=UTF8&qid=1331616867&sr=1-2	2012-12-16 02:00:08	2012-12-16 02:00:08
+117	Bolt	Philips Flat Head	1/4" x 1 1/2"	Stainless	Each	2.00	0.15	100	100	0.02	http://jamestowndistributors.com/userportal/show_product.do?pid=489&familyName=1%2F4-20+S%2FS+Machine+Screws+FP	2012-12-16 02:00:08	2012-12-16 02:00:08
+118	Stove	Force 10 Eno 2 Burner	10" x 20" x 15.5"	Stainless	Each	0.00	340.00	1	1	16.00	http://www.defender.com/product.jsp?path=-1|406|694|319790&id=1125571	2012-12-16 02:00:08	2012-12-16 02:00:08
+120	Gas Detector	CO Detector	\N	\N	Each	1.00	4.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+121	LPG Part	Solenoid, Detector and Control Kit	\N	\N	Each	0.00	325.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|406|301237|322410&id=731239	2012-12-16 02:00:08	2012-12-16 02:00:08
+122	Gas Detector	Gasoline Fume Detector	\N	\N	Each	0.00	142.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|135|296545|747123&id=122154	2012-12-16 02:00:08	2012-12-16 02:00:08
+123	Gas Detector	Propane Detector	\N	\N	Each	0.00	140.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|406|301237|322410&id=122124	2012-12-16 02:00:08	2012-12-16 02:00:08
+124	LPG Part	Bracket-Mount Regulator With Pigtail	\N	\N	Each	0.00	78.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|406|301237|322410&id=59342	2012-12-16 02:00:08	2012-12-16 02:00:08
+125	LPG Part	Hose	10'	\N	Each	0.00	45.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|406|301237|322409&id=1774401	2012-12-16 02:00:08	2012-12-16 02:00:08
+126	LPG Part	Thru-Fitting	\N	\N	Each	0.00	15.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|406|301237|322409&id=730734	2012-12-16 02:00:08	2012-12-16 02:00:08
+127	Tank	LPG Tank	12" dia. x 15" 11 gal.	\N	Each	0.00	105.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|406|301237|322407&id=1065959	2012-12-16 02:00:08	2012-12-16 02:00:08
+128	Tank	Jerry Can	2.5 gal.	\N	Each	0.00	19.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|311|302335|7364|939812&id=811386	2012-12-16 02:00:08	2012-12-16 02:00:08
+129	Electrical	Toggle Switch SPST	\N	\N	Each	1.00	5.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|328|303333|1017101&id=913839	2012-12-16 02:00:08	2012-12-16 02:00:08
+130	Electrical	Duplex Wire	16 AWG	\N	Ft.	0.00	0.45	100	100	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|316476&id=127820	2012-12-16 02:00:08	2012-12-16 02:00:08
+131	Electrical	Primary Wire	16 AWG	\N	Ft.	0.00	0.18	100	100	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|316475|579425&id=863521	2012-12-16 02:00:08	2012-12-16 02:00:08
+132	Electrical	Heatshrink, Adhesive	16-10 AWG	\N	in.	10.00	0.30	60	60	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|299256&id=127925	2012-12-16 02:00:08	2012-12-16 02:00:08
+133	Electrical	Ring Terminal	16-14 AWG #8 screw	\N	Each	10.00	0.30	25	25	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|112306|316480&id=133180	2012-12-16 02:00:08	2012-12-16 02:00:08
+134	Electrical	Ring Terminal Heatshrink	16-14 AWG #8 screw	\N	Each	0.00	0.80	25	25	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|112306|316480&id=50323	2012-12-16 02:00:08	2012-12-16 02:00:08
+135	Electrical	Butt Connector Heatshrink	16-14 AWG	\N	Each	0.00	0.80	25	25	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|112306|316479&id=112307	2012-12-16 02:00:08	2012-12-16 02:00:08
+136	Electrical	Ring Terminal Heatshrink	12-10 AWG, 1/4" screw	\N	Each	0.00	1.08	25	25	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|112306|316480&id=50353	2012-12-16 02:00:08	2012-12-16 02:00:08
+137	Electrical	Ring Terminal	12-10 AWG, 1/4" screw	\N	Each	10.00	0.44	25	25	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|112306|316480&id=49985	2012-12-16 02:00:08	2012-12-16 02:00:08
+138	Electrical	Butt Connector	16-14 AWG	\N	Each	10.00	0.24	25	25	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|112306|316479&id=112262	2012-12-16 02:00:08	2012-12-16 02:00:08
+139	Electrical	Butt Connector	12-10 AWG	\N	Each	10.00	0.38	25	25	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|112306|316479&id=112277	2012-12-16 02:00:08	2012-12-16 02:00:08
+140	Electrical	Butt Connector Heatshrink	12-10 AWG	\N	Each	0.00	1.40	25	25	0.00	http://www.defender.com/product.jsp?path=-1|328|49758|112306|316479&id=112335	2012-12-16 02:00:08	2012-12-16 02:00:08
+141	Electrical	Indicator Light, Red	\N	LED	Each	0.00	3.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|328|299263|319684|1506461&id=1446685	2012-12-16 02:00:08	2012-12-16 02:00:08
+142	Chain Snubber	\N	20" - 38"	\N	Each	0.00	55.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|296895|321828&id=1501905	2012-12-16 02:00:08	2012-12-16 02:00:08
+143	Lumber	Marine Plywood	1/2"	\N	Each	0.00	2.67	32	32	0.00	http://www.worldpanel.com/proddetail.asp?prod=HydroCore	2012-12-16 02:00:08	2012-12-16 02:00:08
+144	Lumber	White Oak	3/4" x 2"	\N	Linear Ft.	0.00	0.90	1	1	0.00	http://marine-plywood.us/Boat-lumber-pricing.htm	2012-12-16 02:00:08	2012-12-16 02:00:08
+145	Nut	Acorn Nut	1/4"	Stainless	Each	0.00	0.14	100	100	0.00	http://jamestowndistributors.com/userportal/show_product.do?pid=1885&familyName=S%2FS+Acorn+%28Cap%29+Nuts	2012-12-16 02:00:08	2012-12-16 02:00:08
+146	Washer	\N	1/4" x 5/8" o.d.	Stainless	Each	0.00	0.02	100	100	0.00	http://jamestowndistributors.com/userportal/show_product.do?pid=1906&familyName=S%2FS+Flat+Washers	2012-12-16 02:00:08	2012-12-16 02:00:08
+147	Varnish	Clear	\N	\N	Qt.	0.00	29.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|296162|10952|311505&id=12909	2012-12-16 02:00:08	2012-12-16 02:00:08
+148	Electrical	Circuit Breaker	Various Amperages	\N	Each	0.00	14.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|328|296553|299262|825439&id=672554	2012-12-16 02:00:08	2012-12-16 02:00:08
+149	Cloth	Sunbrella Canvas Vellum	54"	Acrylic	Yd.	0.00	18.00	1	1	0.00	http://www.sailrite.com/Sunbrella-5498-0000-Canvas-Vellum-54	2012-12-16 02:00:08	2012-12-16 02:00:08
+150	Shackle	\N	5/16" x 2" x 1"	Stainless	Each	0.00	12.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+151	Sextant	Used, Beautiful	\N	\N	Each	0.00	325.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+152	Ship Bell	\N	8" Dia.	\N	Each	0.00	38.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+153	Tool	Cable Cutter	\N	\N	Each	0.00	195.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+154	Eye Strap	\N	3/4" Eye	\N	Each	0.00	1.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+155	PFD	Used Life Jackets Type I	\N	\N	Each	4.00	5.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+156	Pins	Used	1/2"	Stainless	Each	0.00	1.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+157	Winch	Halyard 2 Speed	3" Drum	\N	Each	0.00	150.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+158	Fasteners	Miscellaneous	\N	Stainless	lb.	20.00	7.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+159	Thru-Hull	Used	1/2" - 2"	Bronze	Each	0.00	20.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+160	Shackle	Anchor	1/2"	Galvanized Steel	Each	0.00	4.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+161	Rope	Samson XLS Yacht Braid Tracer	1/2"	Polyester	Ft.	0.00	0.90	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+162	Windows	Used Opening Portlight, Still In Bulkhead	8" x 12"	Aluminum	Each	0.00	30.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+163	Windows	Used Opening Portlight	6" x 12"	Bronze & Glass	Each	0.00	200.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+164	Windows	Used Opening Portlight	6" x 12"	Stainless & Glass	Each	0.00	130.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+165	Windows	Used Crusty Perko Portlight	\N	\N	Each	0.00	40.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+166	Windows	Portlight	12" x 4"	Plastic	Each	0.00	80.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+167	Nav Light	Combo Bow Light	\N	Plastic	Each	0.00	25.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+168	Deck Fill	Miscellaneous Used	\N	Bronze	Each	0.00	25.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+169	Bow Roller	Various	 	Stainless	Each	0.00	125.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+170	Windows	Fixed Portlights	\N	Aluminim	Each	0.00	50.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+171	Gague	Miscellaneous Used	\N	\N	Each	0.00	20.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+172	Electrical	Wire, All Sizes	\N	\N	lb.	0.00	6.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+173	Electrical	Shore Power Cable, Used (Cheapest)	\N	\N	Each	1.00	70.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+174	Fridge Part	Compressor	\N	\N	Each	0.00	500.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+175	Electrical	Marine Battery Charger, Used (Cheapest)			Each	1.00	100.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-17 07:48:42
+176	Electrical	Marine Battery Charger, Used (Expensive)	\N	\N	Each	0.00	200.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+177	Electrical	Shore Power Cable, Used (Most Expensive)	\N	\N	Each	0.00	200.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+178	Windows	Fixed Portlights	Various	Aluminum, Poly	Each	0.00	65.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+179	Epoxy	Sponge Brush	2"	\N	Each	0.00	0.50	36	36	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+180	Band Clamp	\N	8"+	Stainless	Each	0.00	8.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+181	Hatch	Opaque, Various (Smaller)	\N	Plastic	Each	0.00	30.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+182	Hatch	Opaque, Various (Larger)	\N	Plastic	Each	0.00	60.00	1	1	0.00	Miney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+183	Window	Lexan Sheet	1/4" x 1' x 2'	UV Protected Polycarbonate	Each	0.00	14.40	1	1	4.75	http://freckleface.com/shopsite_sc/store/html/product99.html#99	2012-12-16 02:00:08	2012-12-16 02:00:08
+184	Thru-Hull	90 Degree Bend	1 1/2" Hose	Polypropylene	Each	0.00	15.50	1	1	0.00	http://www.jamestowndistributors.com/userportal/product.do?part=110919&BASE	2012-12-16 02:00:08	2012-12-16 02:00:08
+185	Compass	Ritchie Compass Oil	\N	\N	Quart	0.50	20.00	1	1	0.00	http://www.vikingcompass.com/qucooil.html	2012-12-16 02:00:08	2012-12-16 02:00:08
+186	Window	Acrylic Sheet	3/8" x 1'x 2'	Acrylic	Each	7.00	16.00	1	1	4.75	\N	2012-12-16 02:00:08	2012-12-16 02:00:08
+187	Rope	Solid Braid Samson Utility	3/16"	Nylon	Ft.	0.00	0.08	1	1	0.03	http://www.defender.com/product.jsp?path=-1|118|311417|311408&id=440128&cartId=3689340	2012-12-16 02:00:08	2012-12-16 02:00:08
+188	Bolt	Philips Pan Head Machine Screw	#10 x 1"	Stainless	Each	200.00	0.08	100	100	0.02	http://www.jamestowndistributors.com/userportal/product.do?process=checkout&part=9827	2012-12-16 02:00:08	2012-12-16 02:00:08
+189	Nut	Hex Nut	#10	Stainless	Each	200.00	0.04	100	100	0.02	http://www.jamestowndistributors.com/userportal/show_product.do?pid=1889&familyName=S%2FS+Hex+Nuts\n	2012-12-16 02:00:08	2012-12-16 02:00:08
+190	Washer	\N	#10  x 7/16" o.d.	Stainless	Each	200.00	0.04	100	100	0.00	http://www.jamestowndistributors.com/userportal/show_product.do?pid=1906&familyName=S%2FS+Flat+Washers	2012-12-16 02:00:08	2012-12-16 02:00:08
+191	Engine Part	Exhaust wrap kit	2" x 15'	\N	Each	0.00	21.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=EXHT	2012-12-16 02:00:08	2012-12-16 02:00:08
+192	Engine Part	Standpipe	\N	Stainless	Each	0.00	495.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=EXHT	2012-12-16 02:00:08	2012-12-16 02:00:08
+193	Engine Part	Water Temperature Gauge	\N	\N	Each	0.00	66.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=GAUG	2012-12-16 02:00:08	2012-12-16 02:00:08
+194	Engine Part	SW Oil Pressure Gauge	\N	\N	Each	0.00	65.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=GAUG	2012-12-16 02:00:08	2012-12-16 02:00:08
+195	Engine Part	Hour Meter	\N	\N	Each	0.00	35.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=GAUG	2012-12-16 02:00:08	2012-12-16 02:00:08
+196	Valve	Fuel Shutoff Valve	\N	Bronze	Each	0.00	24.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|311|302335|314210&id=1728258	2012-12-16 02:00:08	2012-12-16 02:00:08
+197	Engine Part	Exhaust Flex Section	2" ID x 6"	Stainless	Each	0.00	20.00	1	1	0.00	All over the internet, auto shops, etc.	2012-12-16 02:00:08	2012-12-16 02:00:08
+198	Engine Part	Oil Change Kit			Each	0.00	38.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=KTAS&keywords=all&template=Templates/B000_storebuilder.html	2012-12-16 02:00:08	2012-12-17 07:49:14
+200	Engine Part	Quick Release Throttle Cable Connector	\N	\N	Each	0.00	8.50	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=FCAR	2012-12-16 02:00:08	2012-12-16 02:00:08
+201	Engine Part	Adjustable Carb Main Jet	\N	\N	Each	0.00	41.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=FCAR	2012-12-16 02:00:08	2012-12-16 02:00:08
+203	Tank	Jerry Can	5 gal.	\N	Each	1.00	30.00	1	1	0.00	http://www.amazon.com/No-Spill-1450-5-Gallon-Poly-Compliant/dp/B000W9JN4S/ref=sr_1_2?ie=UTF8&qid=1346321860&sr=8-2&keywords=gas+can	2012-12-16 02:00:08	2012-12-16 02:00:08
+204	Engine Part	Exhaust Paint	\N	\N	Can	0.00	9.50	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=EXHT	2012-12-16 02:00:08	2012-12-16 02:00:08
+205	Engine Part	Manifold Gasket	\N	\N	Each	0.00	8.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=GASK	2012-12-16 02:00:08	2012-12-16 02:00:08
+206	Engine Part	Exhaust Flange Gasket	\N	\N	Each	0.00	3.00	1	1	0.00	http://www.moyermarine.com/cgi-bin/shopper.cgi?search=action&category=GASK	2012-12-16 02:00:08	2012-12-16 02:00:08
+207	Wire Rope	Spool	1/4" 1x19	316 Stainless	Ft.	0.00	2.40	1	250	0.14	http://www.jamestowndistributors.com/userportal/product.do?process=checkout&part=6259	2012-12-16 02:00:08	2012-12-16 02:00:08
+208	Electrical	Solar Panel 12V 50W	58.25" x 26.75" x 1.365"		Each	2.00	145.00	1	1	0.00		2012-12-16 02:00:08	2012-12-17 07:38:10
+209	Electrical	Solar Charge Controller 25A			Each	1.00	140.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|328|49497|1471357&id=1392858	2012-12-16 02:00:08	2012-12-17 07:37:31
+210	Electrical	Solar Charge Controller 25A	\N	\N	Each	0.00	140.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|328|49497|1471357&id=1392858	2012-12-16 02:00:08	2012-12-16 02:00:08
+211	Electrical	Battery	6V 210Ah	Wet Cell Lead Acid	Each	4.00	100.00	1	1	0.00		2012-12-16 02:00:08	2012-12-17 07:39:43
+212	Electrical	Battery Box (Dual 6V)	\N	\N	Each	0.00	65.00	1	1	9.50	http://www.goodboatgear.com/detail/18430/	2012-12-16 02:00:08	2012-12-16 02:00:08
+213	Electrical	Solar Panel 12V 135W Kyorela	60" x 27" x 2"	\N	\N	0.00	370.00	2	1	30.00	http://www.solarhome.org/kyocerakd-135-sx-upu135wsolarpanel.aspx	2012-12-16 02:00:08	2012-12-16 02:00:08
+214	Spar	Tube	2"  OD x 0.65" Wall x 12' Long	Aluminum	Each	0.00	50.00	1	1	10.00	https://www.speedymetals.com/p-4604-2-od-x-065-wall-tube-6061-t6-aluminum.aspx	2012-12-16 02:00:08	2012-12-16 02:00:08
+215	Tarp	Polytarp	16' x 32' Nominal	LDPE	Each	0.00	70.00	1	1	11.00	http://www.a1tarps.com/product.jhtm?id=195&cid=21	2012-12-16 02:00:08	2012-12-16 02:00:08
+999	Stove	Origo 3000 Alcohol 	\N	Stainless	Each	0.00	250.00	1	1	25.00	http://www.ebay.com/sch/i.html?_from=R40&_trksid=p5197.m570.l1313&_nkw=origo+3000&_sacat=See-All-Categories	2012-12-16 02:00:08	2012-12-16 02:00:08
+1000	Stove	Sardine Stove	11" x 12" x 12"	Cast Iron	Each	1.00	1090.00	1	1	50.00	http://www.marinestove.com/sardineinfo.htm	2012-12-17 06:33:41	2013-01-02 23:28:40
+1001	Stove Parts	Deck Iron	4" ID	Bronze	Each	0.00	210.00	1	1	5.00	http://www.marinestove.com/pricelist.htm	2012-12-17 06:39:00	2012-12-17 06:39:00
+1002	Stove Parts	Deck Iron Bung	4"	Rubber	Each	0.00	32.00	1	1	1.00	http://www.marinestove.com/pricelist.htm	2012-12-17 06:40:35	2012-12-17 06:40:35
+1003	Stove Parts	Drop In Burner For Sardine		Bronze	Each	0.00	215.00	1	1	5.00	http://www.marinestove.com/pricelist.htm	2012-12-17 06:41:24	2012-12-17 06:41:24
+1004	Stove Parts	Damper	4"	Cast Iron	Each	0.00	10.00	1	1	0.00	http://www.marinestove.com/pricelist.htm	2012-12-17 07:01:48	2012-12-17 07:03:23
+1005	Stove Parts	Smoke Head	4"	Copper	Each	0.00	205.00	1	1	0.00	http://www.marinestove.com/pricelist.htm	2012-12-17 07:02:38	2012-12-17 07:02:38
+1006	Stove Parts	Pipe	4" ID x 24" x 28 Ga	Stainless	Each	0.00	35.00	1	1	0.00	http://www.marinestove.com/pricelist.htm	2012-12-17 07:24:46	2012-12-17 07:24:46
+1007	Lumber	2x4	1.5" x 3.5"x 16'	Douglas Fir	Each	0.00	6.00	1	1	0.00	Lumber Yard	2012-12-17 07:54:31	2013-01-02 23:40:27
+1008	Sail Cloth	Odessey III Carribean Blue	64" x 6.5oz	Polyester	Yd.	0.00	10.50	1	1	1.00	http://www.outdoortextiles.com/odyssey-III-caribbean-blue.html	2012-12-17 08:14:27	2012-12-17 08:14:27
+1009	Junk Batten	Tube	1.5" OD x 1.370" ID x 144"	Aluminum	Each	0.00	36.00	1	1	4.00	http://www.speedymetals.com/pc-4575-8371-1-12-od-x-065-wall-tube-6061-t6-aluminum.aspx	2012-12-17 08:19:21	2012-12-17 08:21:37
+1010	Wind Generator	KISS Wind Generator			Each	0.00	1000.00	1	1	50.00		2012-12-19 09:57:33	2012-12-19 09:57:33
+1011	Lumber	2x2 Board	1.5" x 1.5" x 8'	Clear Douglas Fir	Each	0.00	8.00	1	1	0.00	Home Depot	2012-12-25 10:41:19	2012-12-25 10:41:19
+1012	Lumber	2x8	1.5" x 7.25" x 16'	Douglas Fir	Each	0.00	12.00	1	1	0.00	Lumber Yard	2013-01-02 23:39:23	2013-01-02 23:39:50
+1013	Lumber	2x10 16'	1.5" x 9.25" x 16'	Douglas Fir	Each	0.00	16.00	1	1	0.00	Lumber Yard	2013-01-02 23:44:48	2013-01-02 23:47:59
+1014	Lumber	2x4 20'	1.5" x 3.5"x 20'	Douglas Fir	Each	0.00	10.00	1	1	0.00	Lumber Yard	2013-01-02 23:47:42	2013-01-02 23:47:48
+\.
+
+
+--
+-- Name: materials_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('materials_id_seq', 1015, true);
+
+
+--
+-- Data for Name: project_materials; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY project_materials (id, project_id, material_id, quantity) FROM stdin;
+93	8	2	2.00
+94	8	5	1.00
+95	52	86	1.00
+96	32	53	15.00
+97	32	54	1.00
+98	32	52	4.00
+99	32	6	0.25
+100	47	89	32.00
+101	47	90	32.00
+102	47	91	32.00
+103	8	3	1.00
+104	55	87	1.00
+105	22	35	1.00
+106	14	13	2.00
+107	14	94	2.00
+108	38	4	1.00
+109	23	161	85.00
+110	23	29	1.00
+111	25	207	230.00
+112	25	99	14.00
+113	25	102	7.00
+114	41	27	80.00
+115	41	62	3.00
+116	41	9	12.00
+117	41	6	1.00
+118	41	11	12.00
+119	41	39	2.00
+120	48	78	1.00
+121	46	77	1.00
+122	13	106	1.25
+123	7	1	4.00
+124	43	117	8.00
+125	43	11	8.00
+126	43	10	8.00
+127	57	127	2.00
+128	57	124	1.00
+129	57	125	1.00
+130	57	126	1.00
+131	57	130	10.00
+132	57	118	1.00
+133	58	44	200.00
+134	58	49	1.00
+135	36	56	1.00
+136	4	72	1.00
+137	4	130	25.00
+138	4	132	5.00
+139	20	143	8.00
+140	20	25	20.00
+141	20	12	0.50
+142	40	9	65.00
+143	40	10	65.00
+144	40	11	65.00
+145	40	12	1.00
+146	40	6	100.00
+147	42	65	1.00
+148	42	131	20.00
+149	42	133	2.00
+150	42	141	3.00
+151	21	27	50.00
+152	11	186	7.00
+153	11	188	130.00
+154	11	189	130.00
+155	11	190	130.00
+156	11	6	32.00
+157	1	148	12.00
+158	57	121	1.00
+159	50	85	1.00
+160	47	109	1.00
+161	47	108	1.00
+162	47	149	3.00
+163	10	7	1.00
+164	59	80	2.00
+165	59	79	2.00
+166	59	132	1.00
+167	59	185	1.00
+168	21	187	320.00
+169	60	144	65.00
+170	60	9	100.00
+171	60	145	100.00
+172	60	146	100.00
+173	61	197	1.00
+174	61	191	1.00
+175	61	204	1.00
+176	61	205	1.00
+177	61	206	1.00
+178	0	0	1.00
+179	62	13	10.00
+180	62	117	10.00
+181	64	208	2.00
+182	64	209	1.00
+183	64	130	20.00
+184	64	211	4.00
+185	296	999	1.00
+186	297	1000	1.00
+187	297	1004	1.00
+188	297	1001	1.00
+189	297	1003	1.00
+190	297	1005	1.00
+191	297	1006	2.00
+192	298	1007	7.00
+193	298	12	1.20
+194	299	1008	35.00
+195	299	1014	12.00
+196	300	1010	1.00
+197	298	1012	3.00
+198	298	1013	3.00
+\.
+
+
+--
+-- Name: project_materials_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('project_materials_id_seq', 199, true);
+
+
+--
+-- Data for Name: project_services; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY project_services (id, project_id, service_id, quantity) FROM stdin;
+\.
+
+
+--
+-- Name: project_services_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('project_services_id_seq', 1, true);
+
+
+--
+-- Data for Name: projects; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY projects (id, name, description, hours_estimate, notes, helpers_needed, liveaboard_priority, daysail_priority, cruising_priority, completed, obsolete, created_at, updated_at) FROM stdin;
+1	Electrical Panel with Breakers	Rewire electrical panel with breakers instead of fuses.	16.00	\N	0	2	2	1	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+2	Sell Spinnakers	Put spinnakers on craigslist or email minnies	4.00	\N	0	8	8	3	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+3	Clean the Bilge	Clear all the water and scrub the alge out	2.00	\N	0	4	4	4	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+4	Steaming Lamp	Reinstall the steaming lamp on the mast, including running wiring inside the mast	4.00	Going aloft	1	9	4	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+5	Anchor Lamp	Inspect anchor lamp when mast comes down	5.00	\N	1	3	9	3	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+7	Bolt Down Pulpits and Stanchions	Check and replace missing bolts on pulpits and stanchions	3.00	\N	0	5	1	1	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+8	Foresail Deck Back	Design and fabricate a bag to protect the foresail without pulling it off the forestay	12.00	\N	0	5	3	3	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+9	Stove Fuel Tank	Buy and install a 5 gallon fuel tank near the stove	4.00	Now have a 5 gallon jerry can for this purpose.	0	2	9	2	t	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+10	Transmission Cable	Remove existing transmission cable, measure it, order a new one, and install it	8.00	Need to cut out port icebox to access transmission cable	0	2	1	1	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+11	Windows	Fabricate new portlights out of acrylic and install them (7 windows)	24.00	4: 22" x 8" = 60" circ.\n1: 18" x 8" = 52" circ\n2: 14" x 8" = 44" circ\n                  = 380"\n____________________\n                      380" circumfrence\nStarboard:\nHole: 24.5" x 8.25"\nHole: 23.5" x 8.5"\nHole: 14" x 7"\nHole: 14" x 7"	0	1	2	2	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+13	Paint Bottom	Sand, prep and paint the hull	16.00	Needs haulout	2	8	3	4	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+14	Eybolts on Cockpit	Install eyebolts so tiller can be lashed for vane steering	2.00		0	9	4	1	f	0	2012-12-16 02:00:07	2012-12-16 03:04:21
+15	Service Winches	Take apart the winches and grease them	4.00	\N	0	9	2	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+16	V-Berth Hatch	V-Berth hatch is quite leaky and needs to be resealed	4.00	\N	0	2	8	5	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+17	Kayak	Fix up the kayak at Josh's, if it's still there, or buy another	8.00	\N	0	7	9	5	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+18	Alternator Diode	Install alternator diode so batteries can be hooked up to charge	2.00	\N	0	5	5	5	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+19	Shroud Chainplate	Fill voids with epoxy when sealing deck	2.00	\N	0	8	4	1	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+20	Stanchion Backplates	Glass in plywood backplates and re-bed all lifeline stanchions.	10.00	\N	0	7	3	3	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+21	Lifelines	Replace the old rusted lifelines	4.00	24' each	0	8	3	3	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+22	Choke Cable	Install a new choke cable\n	1.00	\N	0	8	2	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+23	Main Halyard	Buy and install a new halyard that's long enough to be run to the cockpit	3.00	\N	0	5	4	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+25	Standing Rigging	Measure, buy and install new standing rigging to replace old rod rigging	24.00	Pins are 1/2"\nForestay 41.25'/22.5'\nShrouds 40.25'/20.5'\nAftstay 44.75'	1	8	5	1	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+26	Salon Hatch	Reverse the hatch over the salon so that the boom vang can be installed	3.00	\N	0	8	5	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+27	Fuel Water Separator	Hook up the fuel-water seperator so the carb doesn't get clogged	2.00	\N	0	5	1	1	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+28	Gas Pump Starter Bypass	Install a relay to activate gas pump when starter is cranking	2.00	\N	0	8	5	5	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+29	Bow Cleat	Glass in plywood backing plate for bow cleat	3.00	\N	0	8	6	2	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+31	Boom Vang	Contact manufacturer to get different mast end, then install it	5.00	Depends on Reverse Hatch	0	8	4	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+32	Bilge Topside Drainage	Route auto bilge pump output into output side of manual pump so it goes overboard	3.00	\N	0	3	5	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+33	Head sink drainage	Remove head sink (so it stops filling with water) and cover the hole left with plywood.	4.00	\N	0	2	2	2	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+35	Bilge Hatch	Create and install new bilge hatch, perhaps matching with even floor nearby	12.00	\N	0	4	8	4	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+36	Stern Chainlocker	Build and install a chainlocker aft of the tiller for the stern anchor	8.00	\N	0	6	3	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+37	Bow Chainlocker	Install plywood and/or heavy webbing so that chain in the bow locker doesn't trash the hull	12.00	Alternatively, in the longer term, install two chainlockers toward the sides of the hull just in front of the door to the v-berth.	0	8	4	3	f	0	2012-12-16 02:00:08	2012-12-16 02:19:24
+38	Gas Tank	Buy and install a new 12-gallon gas tank with fittings	8.00	\N	0	9	7	2	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+39	Inspect Old Gas Tank	Pull out, empty and inspect existing gas tank to determine if it's fit for continued service	5.00	\N	0	9	8	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+40	Port Deck	Remove port headliner under deck, pull up all port deck fittings, drill holes to check for core rot, dry any wet core, tape up holes, fill with expoxy, reattach deck hardware	48.00		1	2	5	2	f	0	2012-12-16 02:00:08	2012-12-17 19:31:03
+41	Jacklines	Install jacklines on both sides of the cabin, from bow to stern	12.00	\N	0	8	3	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+42	Salon Lighting	Install LED lighting above salon table	2.00	\N	0	2	8	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+43	Stern Cleats	Install the stern cleats that came with the boat on the stern	5.00	\N	1	5	5	5	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+45	Oil Pressure Ignition Cutoff	Install a relay attached to the oil presure cuttof switch that will cut off ignition power in addition to fuel pump power if oil pressure cuts out. Must have timer for starting grace period. 	5.00	\N	0	8	4	4	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+46	Mirror in Head	Install a stainless steel mirror in the head	1.00	\N	0	4	9	5	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+47	Curtains	Get snaps and install curtains	5.00	\N	0	3	9	5	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+48	Knotmeter Impeller	Buy and install impeller for knotmeter	1.00	\N	0	8	5	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+49	Dive Setup	Get oxygen tank recertified and buy mask and regulator	4.00	\N	0	4	4	4	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+50	LED Masthead Light	Buy and instal an LED bulb in the masthead light	1.00	\N	1	8	6	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+51	Rain Catch System	Devise and set up a system for catching and potentially filtering rainwater	4.00	\N	0	8	8	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+52	Freshwater Engine Cooling	Buy and install freshwater cooling kit for A4	8.00	\N	0	8	8	4	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+53	Mast Collar	Get the correct bolts for the mast collar, so they don't spin loose or rust	1.00	\N	0	8	5	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+54	Third Reef In Mainsail	Contact North Sails and have them install a third reef in the main	4.00	\N	0	8	6	1	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+55	Gennaker	Buy a gennaker for light weather downwind sailing	2.00	\N	0	9	6	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+57	Propane Stove System	Buy and install transom-mounted propane tanks, a regulator, solenoid, line, and stove.	24.00	Mostly just a theoretical cost calculation	0	9	9	9	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+58	Cruising Anchor Gear	Buy and install a windlass and 200' of chain.	32.00		0	9	9	3	f	0	2012-12-16 02:00:08	2013-01-02 23:49:12
+59	Compasses	Buy and install compass domes, LED lights, and compass fluid.	3.00	 	0	5	2	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+60	Window Trim	Once new windows are installed, salvage/buy new/used hardwood trim for interior and exterior	24.00	380" total circumfrence for non-opening windows  * 2 ~= 64' of something like 3/4" x 2" (actual) lumber.	1	8	7	7	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+61	Engine Exhaust	Pull the exhaust manifold, clean it out, extract black iron pipe leading to standpipe. Clean up standpipe, evaluate need to disassemble and reassemble with new copper jacket. Rebuild hot section with new pipe and stainless flex hose, paint, and wrap.	16.00	 	0	4	1	1	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+62	Install Fiddles and Tiedowns	Install fiddles and/or tiedowns for stuff inside the boat so it doesn't go flying at sea.	16.00	 	0	4	1	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+63	Finished Yuloh	Finish the yuloh with the spinnaker pole as a loom.	8.00	 	0	5	2	2	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+64	Solar Electric Setup	Solar panels, charger and battery banks	16.00	 Still need to calculate mounting options	0	3	6	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+297	Wood Stove	Buy and install a wood-burning stove in the galley.	16.00		0	3	9	2	f	0	2012-12-17 07:30:15	2012-12-17 07:35:45
+298	Junk Mast	Fabricate Junk Mast	1.00		0	5	5	5	f	0	2012-12-17 08:03:04	2013-01-02 23:42:52
+299	Junk Sails	Fabricate Junk Sails	1.00		0	6	1	1	f	0	2012-12-17 08:20:32	2012-12-17 08:20:32
+300	Wind Generator	Buy and install a wind generator	1.00		0	5	9	4	f	0	2012-12-19 09:58:32	2012-12-19 09:58:32
+296	Alcohol Stove	Install Origo Stove	5.00		0	1	8	1	f	1	2012-12-16 02:00:07	2013-03-29 20:07:34.533289
+\.
+
+
+--
+-- Data for Name: projects_dependencies; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY projects_dependencies (id, project_id, dependency_id) FROM stdin;
+\.
+
+
+--
+-- Name: projects_dependencies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('projects_dependencies_id_seq', 1, true);
+
+
+--
+-- Name: projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('projects_id_seq', 301, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY schema_migrations (version) FROM stdin;
+20121215224827
+20121215225357
+20121215230227
+20121215230423
+20121215230434
+20121215231114
+20121216002619
+20121216005220
+20121216013110
+20121216013608
+20121216015247
+20121217064503
+20121217064536
+\.
+
+
+--
+-- Data for Name: services; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY services (id, name, description, price, provider, phone, email, website, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: services_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('services_id_seq', 1, true);
+
+
+--
+-- Name: materials_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+ALTER TABLE ONLY materials
+    ADD CONSTRAINT materials_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: project_materials_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+ALTER TABLE ONLY project_materials
+    ADD CONSTRAINT project_materials_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: project_services_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+ALTER TABLE ONLY project_services
+    ADD CONSTRAINT project_services_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: projects_dependencies_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+ALTER TABLE ONLY projects_dependencies
+    ADD CONSTRAINT projects_dependencies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+ALTER TABLE ONLY projects
+    ADD CONSTRAINT projects_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: services_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+ALTER TABLE ONLY services
+    ADD CONSTRAINT services_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
