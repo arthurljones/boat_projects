@@ -2,59 +2,41 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    
-    [:direction, :sort].each { |param| session[param] = session[param] || params[param] }
+    sort_column = params[:sort] || session[:sort]
+    session[:sort] = Project.sortable_by?(sort_column) ? sort_column : "name"
 
-    sort_direction = session[:direction] == "asc" ? "asc" : "desc"
-    column = sort_column(Project)
-
-    if column == "cost"
-      if sort_direction == "asc"
-        @projects = Project.all.sort_by { |e| e.cost }
-      else
-        @projects = Project.all.sort_by { |e| -e.cost }
-      end
-    else
-      @projects = Project.order("#{column} #{sort_direction}")
-    end
+    session[:desc] = (params[:desc] == "true") if params[:desc].present?
+    @unsorted_projects = Project.active.includes(:materials, :services)
+    @projects = @unsorted_projects.sorted_by(session[:sort], session[:desc])
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.json { render json: @projects }
     end
   end
 
-
-
-  # GET /projects/1
-  # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.json { render json: @project }
     end
   end
 
-  # GET /projects/new
-  # GET /projects/new.json
   def new
     @project = Project.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.json { render json: @project }
     end
   end
 
-  # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
   end
 
-  # POST /projects
-  # POST /projects.json
   def create
     @project = Project.new(params[:project])
 
@@ -67,8 +49,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
 
@@ -81,8 +61,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
@@ -90,15 +68,6 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url }
       format.json { head :no_content }
-    end
-  end
-
-  private
-  def sort_column(model_class)
-    if session[:sort] == "cost"
-      return "cost" 
-    else 
-      return super
     end
   end
 
