@@ -1,3 +1,35 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin slider-container {
+  vertical-align: middle;
+}
+
+.priority-slider-container {
+  width: 150px;
+}
+
+.hours-slider-container {
+  width: 180px;
+}
+
+.slider {  
+  display: inline-block;
+  width: 50%;
+  margin-left:10px;
+}
+
+@mixin slider_field {
+  display: inline-block;
+}
+
+.priority_field {
+  @include slider_field;
+  width: 20px;
+}
+
+.hours_field {
+  @include slider_field;
+  width: 48px;
+}
