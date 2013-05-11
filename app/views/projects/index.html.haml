@@ -2,12 +2,11 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize
   = link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary'
-="Total Cost: #{number_to_currency Project.total_cost}"
+="Total Cost: #{number_to_currency @unsorted_projects.cost}"
 %table.table.table-hover
   %thead
     %tr
       %th= sortable model_class, :name
-      %th= sortable model_class, :description
       %th= sortable model_class, :cost
       %th= sortable model_class, :hours_estimate
       %th= sortable model_class, :helpers_needed
@@ -16,14 +15,23 @@
       %th= sortable model_class, :cruising_priority
   %tbody
     - @projects.each do |project|
-      %tr
-        %td= link_to project.name, edit_project_path(project)
-        %td= project.description
-        %td= number_to_currency(project.cost)
-        %td= project.hours_estimate
-        %td= project.helpers_needed
-        %td= project.liveaboard_priority
-        %td= project.daysail_priority
-        %td= project.cruising_priority
+      =form_for project, :remote => true, :id => "form_#{project.id}" do |project_fields|
+        %tr
+          %td= link_to project.name, edit_project_path(project)
+          %td= number_to_currency project.cost
+          %td.hours-slider-container
+            =project_fields.number_field :hours_estimate, { :id => "hours_#{project.id}", :class => "hours_field" }
+          %td.priority-slider-container
+            = project_fields.number_field :helpers_needed, { :id => "helpers_#{project.id}", :class => "priority_field" }
+          %td.priority-slider-container
+            = project_fields.number_field :liveaboard_priority, { :id => "liveaboard_#{project.id}", :class => "priority_field" }
+          %td.priority-slider-container
+            = project_fields.number_field :daysail_priority, { :id => "daysail_#{project.id}", :class => "priority_field" }
+          %td.priority-slider-container
+            = project_fields.number_field :cruising_priority, { :id => "cruising_#{project.id}", :class => "priority_field" }
 
 = link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary'
+
+:coffeescript
+  jQuery ->
+    window.pi = new ProjectsIndex(#{@unsorted_projects.to_json})
