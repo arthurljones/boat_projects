@@ -5,9 +5,7 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'#, '~> 0.11'
-#gem 'postgres-pr'
-#gem 'activerecord-postgresql-adapter'
+gem 'pg'
 gem 'haml'
 gem 'paperclip'
 gem 'json'
@@ -20,6 +18,7 @@ gem 'nested_form'
 gem "validates_existence", ">= 0.5.3"
 gem "squeel"
 gem 'jquery-ui-rails'
+gem 'devise'
 
 group :development do
 	#gem 'mysql2psql'
