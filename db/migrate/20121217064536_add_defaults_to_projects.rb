@@ -9,6 +9,6 @@ class AddDefaultsToProjects < ActiveRecord::Migration
   	change_column :projects, :daysail_priority, :integer, {:default => 5}
   	change_column :projects, :cruising_priority, :integer, {:default => 5}
   	change_column :projects, :completed, :boolean, {:default => false}
-  	change_column :projects, :obsolete, :integer, {:default => false}
+  	change_column :projects, :obsolete, :boolean, {:default => false}
   end
 end

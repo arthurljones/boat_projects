@@ -272,15 +272,14 @@ COPY materials (id, category, description, dimensions, material, units, inventor
 40	Life Line	Turnbuckle, Toggle and Eye 	\N	Stainless	Each	0.00	25.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|297400|312091&id=1256563	2012-12-16 02:00:08	2012-12-16 02:00:08
 42	Anchor	Manson Supreme	25 lb.	Galvanized Steel	Each	0.00	265.00	1	1	25.00	http://www.defender.com/product.jsp?path=-1|10391|33872|902122&id=901916	2012-12-16 02:00:08	2012-12-17 07:46:05
 43	Chain	BBB	5/16"	Galvanized Steel	Ft.	0.00	3.15	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
-44	Chain	G4	5/16"	Galvanized Steel	Ft.	60.00	3.25	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
 49	Windlass	Manual, Used		Bronze	Each	0.00	500.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-17 06:23:31
 50	Hose Clamp	Non-Perferated	1 1/2" - 2 1/2"	Stainless	Each	16.00	3.50	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|315124&id=169427	2012-12-16 02:00:08	2012-12-16 02:00:08
 51	Hose Clamp	Non-Perferated	1" - 1 1/2"	Stainless	Each	0.00	3.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|315124&id=169367	2012-12-16 02:00:08	2012-12-16 02:00:08
 52	Hose Clamp	Non-Perferated	3/4" - 1 1/8"	Stainless	Each	0.00	2.60	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|315124&id=169337	2012-12-16 02:00:08	2012-12-16 02:00:08
 53	Hose	Bilge Pump	3/4"	\N	Ft	10.00	1.30	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|315129&id=106835	2012-12-16 02:00:08	2012-12-16 02:00:08
+152	Ship Bell	\N	8" Dia.	\N	Each	0.00	38.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
 54	Thru-Hull	Straight	3/4"	Plastic	Each	0.00	5.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|51|106370|316448|367124&id=146726	2012-12-16 02:00:08	2012-12-16 02:00:08
 55	Screw	Wood Screw	#8 x 1"	Stainless	Each	20.00	0.12	100	100	0.00	http://www.jamestowndistributors.com/userportal/show_product.do?pid=1903&familyName=%238+S%2FS+Wood+Screws+FP	2012-12-16 02:00:08	2012-12-16 02:00:08
-56	Hawse Pipe	\N	\N	Stainless	Each	0.00	50.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10391|32295|322380&id=1501885	2012-12-16 02:00:08	2012-12-16 02:00:08
 58	Tape	Hatch Gasket	1/8" x 3/4" (7ft roll)	Vinyl	Ft.	0.00	1.00	7	7	0.00	http://www.defender.com/product.jsp?path=-1|6880|6881|311415&id=1576753	2012-12-16 02:00:08	2012-12-16 02:00:08
 59	Hinge	Cabinet 	\N	Stainless	Pair	0.00	7.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|311444|296159&id=25852	2012-12-16 02:00:08	2012-12-16 02:00:08
 60	Hinge	Door, Flush	\N	Stainless	Each	0.00	14.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|311444|296159&id=578335	2012-12-16 02:00:08	2012-12-16 02:00:08
@@ -320,6 +319,8 @@ COPY materials (id, category, description, dimensions, material, units, inventor
 99	Wire Fitting	Swageless Stud	1/4" wire, 5/16" thread	316 Stainless	Each	0.00	37.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|107602|297595|312099&id=136088	2012-12-16 02:00:08	2012-12-16 02:00:08
 102	Wire Fitting	Turnbuckle, Jaw Only	1/2" pin, 5/16" thread	316 Stainless & Chromed Bronze	Each	0.00	74.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|118|107602|297402|823935&id=123904	2012-12-16 02:00:08	2012-12-16 02:00:08
 103	Zinc	Prop Shaft Donut	7/8"	Zinc	Each	0.00	13.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|299255|319700&id=1119292	2012-12-16 02:00:08	2012-12-16 02:00:08
+153	Tool	Cable Cutter	\N	\N	Each	0.00	195.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
+154	Eye Strap	\N	3/4" Eye	\N	Each	0.00	1.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
 106	Bottom Paint	Hard Bottomkote Aqua	\N	\N	Gallon	0.00	120.00	1	1	20.00	http://www.defender.com/product.jsp?path=-1|10918|296162|11000|311496|368288|1183523&id=1833976&cartId=3190162	2012-12-16 02:00:08	2012-12-16 02:00:08
 107	Bottom Paint	Ablative ACT	\N	\N	Gallon	0.00	113.00	1	1	20.00	http://www.defender.com/product.jsp?path=-1|10918|296162|11000|311496|368287&id=730074	2012-12-16 02:00:08	2012-12-16 02:00:08
 108	Tool	Snap Fastener Anvil	\N	\N	Each	0.00	30.00	1	1	0.00	http://www.sailrite.com/snap-fastener-deluxe-installation-tool	2012-12-16 02:00:08	2012-12-16 02:00:08
@@ -359,13 +360,9 @@ COPY materials (id, category, description, dimensions, material, units, inventor
 145	Nut	Acorn Nut	1/4"	Stainless	Each	0.00	0.14	100	100	0.00	http://jamestowndistributors.com/userportal/show_product.do?pid=1885&familyName=S%2FS+Acorn+%28Cap%29+Nuts	2012-12-16 02:00:08	2012-12-16 02:00:08
 146	Washer	\N	1/4" x 5/8" o.d.	Stainless	Each	0.00	0.02	100	100	0.00	http://jamestowndistributors.com/userportal/show_product.do?pid=1906&familyName=S%2FS+Flat+Washers	2012-12-16 02:00:08	2012-12-16 02:00:08
 147	Varnish	Clear	\N	\N	Qt.	0.00	29.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|10918|296162|10952|311505&id=12909	2012-12-16 02:00:08	2012-12-16 02:00:08
-148	Electrical	Circuit Breaker	Various Amperages	\N	Each	0.00	14.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|328|296553|299262|825439&id=672554	2012-12-16 02:00:08	2012-12-16 02:00:08
 149	Cloth	Sunbrella Canvas Vellum	54"	Acrylic	Yd.	0.00	18.00	1	1	0.00	http://www.sailrite.com/Sunbrella-5498-0000-Canvas-Vellum-54	2012-12-16 02:00:08	2012-12-16 02:00:08
 150	Shackle	\N	5/16" x 2" x 1"	Stainless	Each	0.00	12.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
 151	Sextant	Used, Beautiful	\N	\N	Each	0.00	325.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
-152	Ship Bell	\N	8" Dia.	\N	Each	0.00	38.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
-153	Tool	Cable Cutter	\N	\N	Each	0.00	195.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
-154	Eye Strap	\N	3/4" Eye	\N	Each	0.00	1.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
 155	PFD	Used Life Jackets Type I	\N	\N	Each	4.00	5.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
 156	Pins	Used	1/2"	Stainless	Each	0.00	1.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
 157	Winch	Halyard 2 Speed	3" Drum	\N	Each	0.00	150.00	1	1	0.00	Minney's	2012-12-16 02:00:08	2012-12-16 02:00:08
@@ -424,13 +421,11 @@ COPY materials (id, category, description, dimensions, material, units, inventor
 212	Electrical	Battery Box (Dual 6V)	\N	\N	Each	0.00	65.00	1	1	9.50	http://www.goodboatgear.com/detail/18430/	2012-12-16 02:00:08	2012-12-16 02:00:08
 213	Electrical	Solar Panel 12V 135W Kyorela	60" x 27" x 2"	\N	\N	0.00	370.00	2	1	30.00	http://www.solarhome.org/kyocerakd-135-sx-upu135wsolarpanel.aspx	2012-12-16 02:00:08	2012-12-16 02:00:08
 214	Spar	Tube	2"  OD x 0.65" Wall x 12' Long	Aluminum	Each	0.00	50.00	1	1	10.00	https://www.speedymetals.com/p-4604-2-od-x-065-wall-tube-6061-t6-aluminum.aspx	2012-12-16 02:00:08	2012-12-16 02:00:08
-215	Tarp	Polytarp	16' x 32' Nominal	LDPE	Each	0.00	70.00	1	1	11.00	http://www.a1tarps.com/product.jhtm?id=195&cid=21	2012-12-16 02:00:08	2012-12-16 02:00:08
 999	Stove	Origo 3000 Alcohol 	\N	Stainless	Each	0.00	250.00	1	1	25.00	http://www.ebay.com/sch/i.html?_from=R40&_trksid=p5197.m570.l1313&_nkw=origo+3000&_sacat=See-All-Categories	2012-12-16 02:00:08	2012-12-16 02:00:08
 1000	Stove	Sardine Stove	11" x 12" x 12"	Cast Iron	Each	1.00	1090.00	1	1	50.00	http://www.marinestove.com/sardineinfo.htm	2012-12-17 06:33:41	2013-01-02 23:28:40
 1001	Stove Parts	Deck Iron	4" ID	Bronze	Each	0.00	210.00	1	1	5.00	http://www.marinestove.com/pricelist.htm	2012-12-17 06:39:00	2012-12-17 06:39:00
 1002	Stove Parts	Deck Iron Bung	4"	Rubber	Each	0.00	32.00	1	1	1.00	http://www.marinestove.com/pricelist.htm	2012-12-17 06:40:35	2012-12-17 06:40:35
 1003	Stove Parts	Drop In Burner For Sardine		Bronze	Each	0.00	215.00	1	1	5.00	http://www.marinestove.com/pricelist.htm	2012-12-17 06:41:24	2012-12-17 06:41:24
-1004	Stove Parts	Damper	4"	Cast Iron	Each	0.00	10.00	1	1	0.00	http://www.marinestove.com/pricelist.htm	2012-12-17 07:01:48	2012-12-17 07:03:23
 1005	Stove Parts	Smoke Head	4"	Copper	Each	0.00	205.00	1	1	0.00	http://www.marinestove.com/pricelist.htm	2012-12-17 07:02:38	2012-12-17 07:02:38
 1006	Stove Parts	Pipe	4" ID x 24" x 28 Ga	Stainless	Each	0.00	35.00	1	1	0.00	http://www.marinestove.com/pricelist.htm	2012-12-17 07:24:46	2012-12-17 07:24:46
 1007	Lumber	2x4	1.5" x 3.5"x 16'	Douglas Fir	Each	0.00	6.00	1	1	0.00	Lumber Yard	2012-12-17 07:54:31	2013-01-02 23:40:27
@@ -441,6 +436,13 @@ COPY materials (id, category, description, dimensions, material, units, inventor
 1012	Lumber	2x8	1.5" x 7.25" x 16'	Douglas Fir	Each	0.00	12.00	1	1	0.00	Lumber Yard	2013-01-02 23:39:23	2013-01-02 23:39:50
 1013	Lumber	2x10 16'	1.5" x 9.25" x 16'	Douglas Fir	Each	0.00	16.00	1	1	0.00	Lumber Yard	2013-01-02 23:44:48	2013-01-02 23:47:59
 1014	Lumber	2x4 20'	1.5" x 3.5"x 20'	Douglas Fir	Each	0.00	10.00	1	1	0.00	Lumber Yard	2013-01-02 23:47:42	2013-01-02 23:47:48
+148	Electrical	Circuit Breaker	Various Amperages		Each	10.00	14.00	1	1	0.00	http://www.defender.com/product.jsp?path=-1|328|296553|299262|825439&id=672554	2012-12-16 02:00:08	2013-03-28 23:46:51.438601
+56	Pipe		2" Sch. 40	ABS Plastic	Ft	0.00	0.73	10	1	0.00	http://www.homedepot.com/p/t/100583219?catalogId=10053&langId=-1&storeId=10051&N=5yc1vZbqog&R=100583219	2012-12-16 02:00:08	2013-03-28 23:50:41.259571
+215	Tarp	Polytarp	20' x 40' Nominal	6 oz LDPE	Each	0.00	104.00	1	1	18.00	http://www.tarpsurplus.com/yellow-tarp-20x40.html	2012-12-16 02:00:08	2013-04-05 05:57:01.836684
+1016	Chain	G4	1/4"	Galvanized Steel	Ft	0.00	2.90	1	1	0.00	Emp. Discount? http://www.westmarine.com/webapp/wcs/stores/servlet/ProductDisplay?productId=99386&catalogId=10001&langId=-1&storeId=11151&storeNum=50304&subdeptNum=50331&classNum=50332	2013-03-28 23:46:02.722115	2013-04-05 08:09:09.832441
+44	Chain	G4	5/16"	Galvanized Steel	Ft.	0.00	3.25	1	1	0.00	Minney's	2012-12-16 02:00:08	2013-05-11 06:30:23.568956
+1017	Anchor	Manson Supreme	45 lbs	Galvanized Steel	Each	0.00	475.00	1	1	40.00	http://www.defender.com/product.jsp?path=-1|10391|33872|902122&id=901954	2013-05-11 06:35:57.445145	2013-05-11 06:35:57.445145
+1004	Stove Parts	Damper	4"	Cast Iron	Each	1.00	10.00	1	1	0.00	http://www.marinestove.com/pricelist.htm	2012-12-17 07:01:48	2013-05-11 06:37:36.335736
 \.
 
 
@@ -448,7 +450,7 @@ COPY materials (id, category, description, dimensions, material, units, inventor
 -- Name: materials_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
 --
 
-SELECT pg_catalog.setval('materials_id_seq', 1015, true);
+SELECT pg_catalog.setval('materials_id_seq', 1017, true);
 
 
 --
@@ -496,9 +498,6 @@ COPY project_materials (id, project_id, material_id, quantity) FROM stdin;
 130	57	126	1.00
 131	57	130	10.00
 132	57	118	1.00
-133	58	44	200.00
-134	58	49	1.00
-135	36	56	1.00
 136	4	72	1.00
 137	4	130	25.00
 138	4	132	5.00
@@ -520,7 +519,6 @@ COPY project_materials (id, project_id, material_id, quantity) FROM stdin;
 154	11	189	130.00
 155	11	190	130.00
 156	11	6	32.00
-157	1	148	12.00
 158	57	121	1.00
 159	50	85	1.00
 160	47	109	1.00
@@ -557,11 +555,15 @@ COPY project_materials (id, project_id, material_id, quantity) FROM stdin;
 191	297	1006	2.00
 192	298	1007	7.00
 193	298	12	1.20
-194	299	1008	35.00
-195	299	1014	12.00
 196	300	1010	1.00
 197	298	1012	3.00
 198	298	1013	3.00
+157	1	148	10.00
+135	36	56	5.00
+194	299	215	1.00
+195	299	1007	15.00
+133	58	44	250.00
+134	58	1017	1.00
 \.
 
 
@@ -592,13 +594,9 @@ SELECT pg_catalog.setval('project_services_id_seq', 1, true);
 --
 
 COPY projects (id, name, description, hours_estimate, notes, helpers_needed, liveaboard_priority, daysail_priority, cruising_priority, completed, obsolete, created_at, updated_at) FROM stdin;
-1	Electrical Panel with Breakers	Rewire electrical panel with breakers instead of fuses.	16.00	\N	0	2	2	1	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
-2	Sell Spinnakers	Put spinnakers on craigslist or email minnies	4.00	\N	0	8	8	3	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
 3	Clean the Bilge	Clear all the water and scrub the alge out	2.00	\N	0	4	4	4	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
 4	Steaming Lamp	Reinstall the steaming lamp on the mast, including running wiring inside the mast	4.00	Going aloft	1	9	4	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
 5	Anchor Lamp	Inspect anchor lamp when mast comes down	5.00	\N	1	3	9	3	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
-7	Bolt Down Pulpits and Stanchions	Check and replace missing bolts on pulpits and stanchions	3.00	\N	0	5	1	1	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
-8	Foresail Deck Back	Design and fabricate a bag to protect the foresail without pulling it off the forestay	12.00	\N	0	5	3	3	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
 9	Stove Fuel Tank	Buy and install a 5 gallon fuel tank near the stove	4.00	Now have a 5 gallon jerry can for this purpose.	0	2	9	2	t	0	2012-12-16 02:00:07	2012-12-16 02:00:07
 10	Transmission Cable	Remove existing transmission cable, measure it, order a new one, and install it	8.00	Need to cut out port icebox to access transmission cable	0	2	1	1	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
 11	Windows	Fabricate new portlights out of acrylic and install them (7 windows)	24.00	4: 22" x 8" = 60" circ.\n1: 18" x 8" = 52" circ\n2: 14" x 8" = 44" circ\n                  = 380"\n____________________\n                      380" circumfrence\nStarboard:\nHole: 24.5" x 8.25"\nHole: 23.5" x 8.5"\nHole: 14" x 7"\nHole: 14" x 7"	0	1	2	2	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
@@ -621,9 +619,6 @@ COPY projects (id, name, description, hours_estimate, notes, helpers_needed, liv
 31	Boom Vang	Contact manufacturer to get different mast end, then install it	5.00	Depends on Reverse Hatch	0	8	4	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 32	Bilge Topside Drainage	Route auto bilge pump output into output side of manual pump so it goes overboard	3.00	\N	0	3	5	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 33	Head sink drainage	Remove head sink (so it stops filling with water) and cover the hole left with plywood.	4.00	\N	0	2	2	2	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
-35	Bilge Hatch	Create and install new bilge hatch, perhaps matching with even floor nearby	12.00	\N	0	4	8	4	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
-36	Stern Chainlocker	Build and install a chainlocker aft of the tiller for the stern anchor	8.00	\N	0	6	3	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
-37	Bow Chainlocker	Install plywood and/or heavy webbing so that chain in the bow locker doesn't trash the hull	12.00	Alternatively, in the longer term, install two chainlockers toward the sides of the hull just in front of the door to the v-berth.	0	8	4	3	f	0	2012-12-16 02:00:08	2012-12-16 02:19:24
 38	Gas Tank	Buy and install a new 12-gallon gas tank with fittings	8.00	\N	0	9	7	2	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 39	Inspect Old Gas Tank	Pull out, empty and inspect existing gas tank to determine if it's fit for continued service	5.00	\N	0	9	8	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 40	Port Deck	Remove port headliner under deck, pull up all port deck fittings, drill holes to check for core rot, dry any wet core, tape up holes, fill with expoxy, reattach deck hardware	48.00		1	2	5	2	f	0	2012-12-16 02:00:08	2012-12-17 19:31:03
@@ -632,28 +627,35 @@ COPY projects (id, name, description, hours_estimate, notes, helpers_needed, liv
 43	Stern Cleats	Install the stern cleats that came with the boat on the stern	5.00	\N	1	5	5	5	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 45	Oil Pressure Ignition Cutoff	Install a relay attached to the oil presure cuttof switch that will cut off ignition power in addition to fuel pump power if oil pressure cuts out. Must have timer for starting grace period. 	5.00	\N	0	8	4	4	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 46	Mirror in Head	Install a stainless steel mirror in the head	1.00	\N	0	4	9	5	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
-47	Curtains	Get snaps and install curtains	5.00	\N	0	3	9	5	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 48	Knotmeter Impeller	Buy and install impeller for knotmeter	1.00	\N	0	8	5	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 49	Dive Setup	Get oxygen tank recertified and buy mask and regulator	4.00	\N	0	4	4	4	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 50	LED Masthead Light	Buy and instal an LED bulb in the masthead light	1.00	\N	1	8	6	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 51	Rain Catch System	Devise and set up a system for catching and potentially filtering rainwater	4.00	\N	0	8	8	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+1	Electrical Panel with Breakers	Rewire electrical panel with breakers instead of fuses.	16.00		0	2	2	1	f	0	2012-12-16 02:00:07	2013-03-28 23:47:04.626835
+8	Foresail Deck Back	Design and fabricate a bag to protect the foresail without pulling it off the forestay	12.00		0	5	3	3	f	1	2012-12-16 02:00:07	2013-03-28 23:47:28.886517
+2	Sell Spinnakers	Put spinnakers on craigslist or email minnies	4.00		0	8	8	3	f	1	2012-12-16 02:00:07	2013-03-28 23:47:33.178303
+36	Stern Chainlocker	Build and install a chainlocker aft of the tiller for the stern anchor	8.00		0	6	3	3	f	0	2012-12-16 02:00:08	2013-03-28 23:50:56.461186
+47	Curtains	Get snaps and install curtains	5.00		0	3	9	5	f	1	2012-12-16 02:00:08	2013-04-05 06:22:52.817002
 52	Freshwater Engine Cooling	Buy and install freshwater cooling kit for A4	8.00	\N	0	8	8	4	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 53	Mast Collar	Get the correct bolts for the mast collar, so they don't spin loose or rust	1.00	\N	0	8	5	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 54	Third Reef In Mainsail	Contact North Sails and have them install a third reef in the main	4.00	\N	0	8	6	1	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 55	Gennaker	Buy a gennaker for light weather downwind sailing	2.00	\N	0	9	6	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 57	Propane Stove System	Buy and install transom-mounted propane tanks, a regulator, solenoid, line, and stove.	24.00	Mostly just a theoretical cost calculation	0	9	9	9	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
-58	Cruising Anchor Gear	Buy and install a windlass and 200' of chain.	32.00		0	9	9	3	f	0	2012-12-16 02:00:08	2013-01-02 23:49:12
 59	Compasses	Buy and install compass domes, LED lights, and compass fluid.	3.00	 	0	5	2	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
-60	Window Trim	Once new windows are installed, salvage/buy new/used hardwood trim for interior and exterior	24.00	380" total circumfrence for non-opening windows  * 2 ~= 64' of something like 3/4" x 2" (actual) lumber.	1	8	7	7	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 61	Engine Exhaust	Pull the exhaust manifold, clean it out, extract black iron pipe leading to standpipe. Clean up standpipe, evaluate need to disassemble and reassemble with new copper jacket. Rebuild hot section with new pipe and stainless flex hose, paint, and wrap.	16.00	 	0	4	1	1	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
 62	Install Fiddles and Tiedowns	Install fiddles and/or tiedowns for stuff inside the boat so it doesn't go flying at sea.	16.00	 	0	4	1	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 63	Finished Yuloh	Finish the yuloh with the spinnaker pole as a loom.	8.00	 	0	5	2	2	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
 64	Solar Electric Setup	Solar panels, charger and battery banks	16.00	 Still need to calculate mounting options	0	3	6	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
-297	Wood Stove	Buy and install a wood-burning stove in the galley.	16.00		0	3	9	2	f	0	2012-12-17 07:30:15	2012-12-17 07:35:45
 298	Junk Mast	Fabricate Junk Mast	1.00		0	5	5	5	f	0	2012-12-17 08:03:04	2013-01-02 23:42:52
 299	Junk Sails	Fabricate Junk Sails	1.00		0	6	1	1	f	0	2012-12-17 08:20:32	2012-12-17 08:20:32
-300	Wind Generator	Buy and install a wind generator	1.00		0	5	9	4	f	0	2012-12-19 09:58:32	2012-12-19 09:58:32
-296	Alcohol Stove	Install Origo Stove	5.00		0	1	8	1	f	1	2012-12-16 02:00:07	2013-03-29 20:07:34.533289
+296	Alcohol Stove	Install Origo Stove	5.00		0	1	8	1	f	1	2012-12-16 02:00:07	2013-03-28 23:34:57.388476
+35	Bilge Hatch	Create and install new bilge hatch, perhaps matching with even floor nearby	12.00		0	4	8	4	f	1	2012-12-16 02:00:08	2013-03-28 23:37:28.513709
+37	Bow Chainlocker	Install plywood and/or heavy webbing so that chain in the bow locker doesn't trash the hull	12.00	Alternatively, in the longer term, install two chainlockers toward the sides of the hull just in front of the door to the v-berth.	0	8	4	3	f	1	2012-12-16 02:00:08	2013-03-28 23:37:33.457836
+7	Bolt Down Pulpits and Stanchions	Check and replace missing bolts on pulpits and stanchions	3.00		0	5	1	1	f	1	2012-12-16 02:00:07	2013-03-28 23:37:38.411828
+300	Wind Generator	Buy and install a wind generator	1.00		0	5	9	4	f	1	2012-12-19 09:58:32	2013-03-28 23:51:08.540854
+60	Window Trim	Once new windows are installed, salvage/buy new/used hardwood trim for interior and exterior	24.00	380" total circumfrence for non-opening windows  * 2 ~= 64' of something like 3/4" x 2" (actual) lumber.	1	8	7	7	f	1	2012-12-16 02:00:08	2013-03-28 23:51:15.170068
+58	Cruising Anchor Gear	Buy 250' of 5/16" G40 chain and a heavy anchor.	32.00		0	9	9	3	f	0	2012-12-16 02:00:08	2013-05-11 06:36:41.520793
+297	Wood Stove	Install the wood-burning stove in the galley.	16.00		0	3	9	2	f	0	2012-12-17 07:30:15	2013-05-11 06:37:11.356825
 \.
 
 
@@ -768,16 +770,6 @@ ALTER TABLE ONLY services
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
