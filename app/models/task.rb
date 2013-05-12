@@ -3,10 +3,14 @@ class Task < ActiveRecord::Base
   attr_accessor :_destroy
 
   has_many :task_materials, :dependent => :destroy
-  has_many :task_services, :dependent => :destroy
   has_many :materials, :through => :task_materials
+
+  has_many :task_services, :dependent => :destroy
   has_many :services, :through => :task_services
-  has_many :dependencies, :through => :tasks_dependencies, :class_name => 'Task', :foreign_key => 'dependency_id'
+
+  has_many :task_dependencies, :dependent => :destroy
+  has_many :dependencies, :through => :task_dependencies
+  has_many :dependents, :through => :task_dependencies, :source => :dependencies
 
   scope :complete, where{completed == true}
   scope :incomplete, where{completed == false}

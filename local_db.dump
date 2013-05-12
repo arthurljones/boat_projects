@@ -232,6 +232,164 @@ CREATE TABLE services (
 ALTER TABLE public.services OWNER TO boat_projects;
 
 --
+-- Name: task_materials_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE task_materials_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.task_materials_id_seq OWNER TO boat_projects;
+
+--
+-- Name: task_materials; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE task_materials (
+    id integer DEFAULT nextval('task_materials_id_seq'::regclass) NOT NULL,
+    project_id integer,
+    material_id integer,
+    quantity numeric(10,2)
+);
+
+
+ALTER TABLE public.task_materials OWNER TO boat_projects;
+
+--
+-- Name: task_services_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE task_services_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.task_services_id_seq OWNER TO boat_projects;
+
+--
+-- Name: task_services; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE task_services (
+    id integer DEFAULT nextval('task_services_id_seq'::regclass) NOT NULL,
+    project_id integer,
+    service_id integer,
+    quantity numeric(10,2)
+);
+
+
+ALTER TABLE public.task_services OWNER TO boat_projects;
+
+--
+-- Name: tasks_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE tasks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tasks_id_seq OWNER TO boat_projects;
+
+--
+-- Name: tasks; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE tasks (
+    id integer DEFAULT nextval('tasks_id_seq'::regclass) NOT NULL,
+    name character varying(255) DEFAULT ''::character varying,
+    description character varying(255) DEFAULT ''::character varying,
+    hours_estimate numeric(10,2) DEFAULT 1.00,
+    notes character varying(255) DEFAULT ''::character varying,
+    helpers_needed integer DEFAULT 0,
+    liveaboard_priority integer DEFAULT 5,
+    daysail_priority integer DEFAULT 5,
+    cruising_priority integer DEFAULT 5,
+    completed boolean DEFAULT false,
+    obsolete integer DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.tasks OWNER TO boat_projects;
+
+--
+-- Name: tasks_dependencies_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE tasks_dependencies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tasks_dependencies_id_seq OWNER TO boat_projects;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying(255),
+    last_sign_in_ip character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO boat_projects;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: boat_projects
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO boat_projects;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: boat_projects
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: boat_projects
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
 -- Data for Name: materials; Type: TABLE DATA; Schema: public; Owner: boat_projects
 --
 
@@ -718,6 +876,241 @@ SELECT pg_catalog.setval('services_id_seq', 1, true);
 
 
 --
+-- Data for Name: task_materials; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY task_materials (id, project_id, material_id, quantity) FROM stdin;
+93	8	2	2.00
+94	8	5	1.00
+95	52	86	1.00
+96	32	53	15.00
+97	32	54	1.00
+98	32	52	4.00
+99	32	6	0.25
+100	47	89	32.00
+101	47	90	32.00
+102	47	91	32.00
+103	8	3	1.00
+104	55	87	1.00
+105	22	35	1.00
+106	14	13	2.00
+107	14	94	2.00
+108	38	4	1.00
+109	23	161	85.00
+110	23	29	1.00
+111	25	207	230.00
+112	25	99	14.00
+113	25	102	7.00
+114	41	27	80.00
+115	41	62	3.00
+116	41	9	12.00
+117	41	6	1.00
+118	41	11	12.00
+119	41	39	2.00
+120	48	78	1.00
+121	46	77	1.00
+122	13	106	1.25
+123	7	1	4.00
+124	43	117	8.00
+125	43	11	8.00
+126	43	10	8.00
+127	57	127	2.00
+128	57	124	1.00
+129	57	125	1.00
+130	57	126	1.00
+131	57	130	10.00
+132	57	118	1.00
+136	4	72	1.00
+137	4	130	25.00
+138	4	132	5.00
+139	20	143	8.00
+140	20	25	20.00
+141	20	12	0.50
+142	40	9	65.00
+143	40	10	65.00
+144	40	11	65.00
+145	40	12	1.00
+146	40	6	100.00
+147	42	65	1.00
+148	42	131	20.00
+149	42	133	2.00
+150	42	141	3.00
+151	21	27	50.00
+152	11	186	7.00
+153	11	188	130.00
+154	11	189	130.00
+155	11	190	130.00
+156	11	6	32.00
+158	57	121	1.00
+159	50	85	1.00
+160	47	109	1.00
+161	47	108	1.00
+162	47	149	3.00
+163	10	7	1.00
+164	59	80	2.00
+165	59	79	2.00
+166	59	132	1.00
+167	59	185	1.00
+168	21	187	320.00
+169	60	144	65.00
+170	60	9	100.00
+171	60	145	100.00
+172	60	146	100.00
+173	61	197	1.00
+174	61	191	1.00
+175	61	204	1.00
+176	61	205	1.00
+177	61	206	1.00
+178	0	0	1.00
+179	62	13	10.00
+180	62	117	10.00
+181	64	208	2.00
+182	64	209	1.00
+183	64	130	20.00
+184	64	211	4.00
+185	296	999	1.00
+186	297	1000	1.00
+187	297	1004	1.00
+188	297	1001	1.00
+189	297	1003	1.00
+190	297	1005	1.00
+191	297	1006	2.00
+192	298	1007	7.00
+193	298	12	1.20
+196	300	1010	1.00
+197	298	1012	3.00
+198	298	1013	3.00
+157	1	148	10.00
+135	36	56	5.00
+194	299	215	1.00
+195	299	1007	15.00
+133	58	44	250.00
+134	58	1017	1.00
+\.
+
+
+--
+-- Name: task_materials_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('task_materials_id_seq', 199, true);
+
+
+--
+-- Data for Name: task_services; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY task_services (id, project_id, service_id, quantity) FROM stdin;
+\.
+
+
+--
+-- Name: task_services_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('task_services_id_seq', 1, true);
+
+
+--
+-- Data for Name: tasks; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY tasks (id, name, description, hours_estimate, notes, helpers_needed, liveaboard_priority, daysail_priority, cruising_priority, completed, obsolete, created_at, updated_at) FROM stdin;
+3	Clean the Bilge	Clear all the water and scrub the alge out	2.00	\N	0	4	4	4	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+4	Steaming Lamp	Reinstall the steaming lamp on the mast, including running wiring inside the mast	4.00	Going aloft	1	9	4	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+5	Anchor Lamp	Inspect anchor lamp when mast comes down	5.00	\N	1	3	9	3	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+9	Stove Fuel Tank	Buy and install a 5 gallon fuel tank near the stove	4.00	Now have a 5 gallon jerry can for this purpose.	0	2	9	2	t	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+10	Transmission Cable	Remove existing transmission cable, measure it, order a new one, and install it	8.00	Need to cut out port icebox to access transmission cable	0	2	1	1	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+11	Windows	Fabricate new portlights out of acrylic and install them (7 windows)	24.00	4: 22" x 8" = 60" circ.\n1: 18" x 8" = 52" circ\n2: 14" x 8" = 44" circ\n                  = 380"\n____________________\n                      380" circumfrence\nStarboard:\nHole: 24.5" x 8.25"\nHole: 23.5" x 8.5"\nHole: 14" x 7"\nHole: 14" x 7"	0	1	2	2	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+13	Paint Bottom	Sand, prep and paint the hull	16.00	Needs haulout	2	8	3	4	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+14	Eybolts on Cockpit	Install eyebolts so tiller can be lashed for vane steering	2.00		0	9	4	1	f	0	2012-12-16 02:00:07	2012-12-16 03:04:21
+15	Service Winches	Take apart the winches and grease them	4.00	\N	0	9	2	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+16	V-Berth Hatch	V-Berth hatch is quite leaky and needs to be resealed	4.00	\N	0	2	8	5	f	0	2012-12-16 02:00:07	2012-12-16 02:00:07
+17	Kayak	Fix up the kayak at Josh's, if it's still there, or buy another	8.00	\N	0	7	9	5	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+18	Alternator Diode	Install alternator diode so batteries can be hooked up to charge	2.00	\N	0	5	5	5	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+19	Shroud Chainplate	Fill voids with epoxy when sealing deck	2.00	\N	0	8	4	1	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+20	Stanchion Backplates	Glass in plywood backplates and re-bed all lifeline stanchions.	10.00	\N	0	7	3	3	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+21	Lifelines	Replace the old rusted lifelines	4.00	24' each	0	8	3	3	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+22	Choke Cable	Install a new choke cable\n	1.00	\N	0	8	2	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+23	Main Halyard	Buy and install a new halyard that's long enough to be run to the cockpit	3.00	\N	0	5	4	2	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+25	Standing Rigging	Measure, buy and install new standing rigging to replace old rod rigging	24.00	Pins are 1/2"\nForestay 41.25'/22.5'\nShrouds 40.25'/20.5'\nAftstay 44.75'	1	8	5	1	f	1	2012-12-16 02:00:07	2012-12-16 02:00:07
+26	Salon Hatch	Reverse the hatch over the salon so that the boom vang can be installed	3.00	\N	0	8	5	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+27	Fuel Water Separator	Hook up the fuel-water seperator so the carb doesn't get clogged	2.00	\N	0	5	1	1	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+28	Gas Pump Starter Bypass	Install a relay to activate gas pump when starter is cranking	2.00	\N	0	8	5	5	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+29	Bow Cleat	Glass in plywood backing plate for bow cleat	3.00	\N	0	8	6	2	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+31	Boom Vang	Contact manufacturer to get different mast end, then install it	5.00	Depends on Reverse Hatch	0	8	4	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+32	Bilge Topside Drainage	Route auto bilge pump output into output side of manual pump so it goes overboard	3.00	\N	0	3	5	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+33	Head sink drainage	Remove head sink (so it stops filling with water) and cover the hole left with plywood.	4.00	\N	0	2	2	2	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+38	Gas Tank	Buy and install a new 12-gallon gas tank with fittings	8.00	\N	0	9	7	2	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+39	Inspect Old Gas Tank	Pull out, empty and inspect existing gas tank to determine if it's fit for continued service	5.00	\N	0	9	8	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+40	Port Deck	Remove port headliner under deck, pull up all port deck fittings, drill holes to check for core rot, dry any wet core, tape up holes, fill with expoxy, reattach deck hardware	48.00		1	2	5	2	f	0	2012-12-16 02:00:08	2012-12-17 19:31:03
+41	Jacklines	Install jacklines on both sides of the cabin, from bow to stern	12.00	\N	0	8	3	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+42	Salon Lighting	Install LED lighting above salon table	2.00	\N	0	2	8	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+43	Stern Cleats	Install the stern cleats that came with the boat on the stern	5.00	\N	1	5	5	5	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+45	Oil Pressure Ignition Cutoff	Install a relay attached to the oil presure cuttof switch that will cut off ignition power in addition to fuel pump power if oil pressure cuts out. Must have timer for starting grace period. 	5.00	\N	0	8	4	4	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+46	Mirror in Head	Install a stainless steel mirror in the head	1.00	\N	0	4	9	5	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+48	Knotmeter Impeller	Buy and install impeller for knotmeter	1.00	\N	0	8	5	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+49	Dive Setup	Get oxygen tank recertified and buy mask and regulator	4.00	\N	0	4	4	4	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+50	LED Masthead Light	Buy and instal an LED bulb in the masthead light	1.00	\N	1	8	6	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+51	Rain Catch System	Devise and set up a system for catching and potentially filtering rainwater	4.00	\N	0	8	8	3	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+1	Electrical Panel with Breakers	Rewire electrical panel with breakers instead of fuses.	16.00		0	2	2	1	f	0	2012-12-16 02:00:07	2013-03-28 23:47:04.626835
+8	Foresail Deck Back	Design and fabricate a bag to protect the foresail without pulling it off the forestay	12.00		0	5	3	3	f	1	2012-12-16 02:00:07	2013-03-28 23:47:28.886517
+2	Sell Spinnakers	Put spinnakers on craigslist or email minnies	4.00		0	8	8	3	f	1	2012-12-16 02:00:07	2013-03-28 23:47:33.178303
+36	Stern Chainlocker	Build and install a chainlocker aft of the tiller for the stern anchor	8.00		0	6	3	3	f	0	2012-12-16 02:00:08	2013-03-28 23:50:56.461186
+47	Curtains	Get snaps and install curtains	5.00		0	3	9	5	f	1	2012-12-16 02:00:08	2013-04-05 06:22:52.817002
+52	Freshwater Engine Cooling	Buy and install freshwater cooling kit for A4	8.00	\N	0	8	8	4	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+53	Mast Collar	Get the correct bolts for the mast collar, so they don't spin loose or rust	1.00	\N	0	8	5	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+54	Third Reef In Mainsail	Contact North Sails and have them install a third reef in the main	4.00	\N	0	8	6	1	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+55	Gennaker	Buy a gennaker for light weather downwind sailing	2.00	\N	0	9	6	3	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+57	Propane Stove System	Buy and install transom-mounted propane tanks, a regulator, solenoid, line, and stove.	24.00	Mostly just a theoretical cost calculation	0	9	9	9	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+59	Compasses	Buy and install compass domes, LED lights, and compass fluid.	3.00	 	0	5	2	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+61	Engine Exhaust	Pull the exhaust manifold, clean it out, extract black iron pipe leading to standpipe. Clean up standpipe, evaluate need to disassemble and reassemble with new copper jacket. Rebuild hot section with new pipe and stainless flex hose, paint, and wrap.	16.00	 	0	4	1	1	f	1	2012-12-16 02:00:08	2012-12-16 02:00:08
+62	Install Fiddles and Tiedowns	Install fiddles and/or tiedowns for stuff inside the boat so it doesn't go flying at sea.	16.00	 	0	4	1	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+63	Finished Yuloh	Finish the yuloh with the spinnaker pole as a loom.	8.00	 	0	5	2	2	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+64	Solar Electric Setup	Solar panels, charger and battery banks	16.00	 Still need to calculate mounting options	0	3	6	1	f	0	2012-12-16 02:00:08	2012-12-16 02:00:08
+298	Junk Mast	Fabricate Junk Mast	1.00		0	5	5	5	f	0	2012-12-17 08:03:04	2013-01-02 23:42:52
+299	Junk Sails	Fabricate Junk Sails	1.00		0	6	1	1	f	0	2012-12-17 08:20:32	2012-12-17 08:20:32
+296	Alcohol Stove	Install Origo Stove	5.00		0	1	8	1	f	1	2012-12-16 02:00:07	2013-03-28 23:34:57.388476
+35	Bilge Hatch	Create and install new bilge hatch, perhaps matching with even floor nearby	12.00		0	4	8	4	f	1	2012-12-16 02:00:08	2013-03-28 23:37:28.513709
+37	Bow Chainlocker	Install plywood and/or heavy webbing so that chain in the bow locker doesn't trash the hull	12.00	Alternatively, in the longer term, install two chainlockers toward the sides of the hull just in front of the door to the v-berth.	0	8	4	3	f	1	2012-12-16 02:00:08	2013-03-28 23:37:33.457836
+7	Bolt Down Pulpits and Stanchions	Check and replace missing bolts on pulpits and stanchions	3.00		0	5	1	1	f	1	2012-12-16 02:00:07	2013-03-28 23:37:38.411828
+300	Wind Generator	Buy and install a wind generator	1.00		0	5	9	4	f	1	2012-12-19 09:58:32	2013-03-28 23:51:08.540854
+60	Window Trim	Once new windows are installed, salvage/buy new/used hardwood trim for interior and exterior	24.00	380" total circumfrence for non-opening windows  * 2 ~= 64' of something like 3/4" x 2" (actual) lumber.	1	8	7	7	f	1	2012-12-16 02:00:08	2013-03-28 23:51:15.170068
+58	Cruising Anchor Gear	Buy 250' of 5/16" G40 chain and a heavy anchor.	32.00		0	9	9	3	f	0	2012-12-16 02:00:08	2013-05-11 06:36:41.520793
+297	Wood Stove	Install the wood-burning stove in the galley.	16.00		0	3	9	2	f	0	2012-12-17 07:30:15	2013-05-11 06:37:11.356825
+\.
+
+
+--
+-- Name: tasks_dependencies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('tasks_dependencies_id_seq', 1, true);
+
+
+--
+-- Name: tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('tasks_id_seq', 301, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: boat_projects
+--
+
+COPY users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: boat_projects
+--
+
+SELECT pg_catalog.setval('users_id_seq', 1, false);
+
+
+--
 -- Name: materials_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
 --
 
@@ -729,7 +1122,7 @@ ALTER TABLE ONLY materials
 -- Name: project_materials_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
 --
 
-ALTER TABLE ONLY project_materials
+ALTER TABLE ONLY task_materials
     ADD CONSTRAINT project_materials_pkey PRIMARY KEY (id);
 
 
@@ -737,7 +1130,7 @@ ALTER TABLE ONLY project_materials
 -- Name: project_services_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
 --
 
-ALTER TABLE ONLY project_services
+ALTER TABLE ONLY task_services
     ADD CONSTRAINT project_services_pkey PRIMARY KEY (id);
 
 
@@ -753,7 +1146,7 @@ ALTER TABLE ONLY projects_dependencies
 -- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
 --
 
-ALTER TABLE ONLY projects
+ALTER TABLE ONLY tasks
     ADD CONSTRAINT projects_pkey PRIMARY KEY (id);
 
 
@@ -763,6 +1156,28 @@ ALTER TABLE ONLY projects
 
 ALTER TABLE ONLY services
     ADD CONSTRAINT services_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: boat_projects; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --
