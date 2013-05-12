@@ -1,14 +1,14 @@
-class self.ProjectsIndex
-  constructor: (@projects) ->
-    for project in projects
-      @addSlider(project, 'hours', 0, 7, 0.01, true)
+class self.tasksIndex
+  constructor: (@tasks) ->
+    for task in tasks
+      @addSlider(task, 'hours', 0, 7, 0.01, true)
 
       for field in ['helpers', 'liveaboard', 'daysail', 'cruising']
-        @addSlider(project, field, 1, 10, 1)
+        @addSlider(task, field, 1, 10, 1)
 
-  addSlider: (project, field, min, max, step, logarithmic=false) ->
-    field_element = $('#' + field + '_' + project.id)
-    slider_id = field + '_slider_' + project.id
+  addSlider: (task, field, min, max, step, logarithmic=false) ->
+    field_element = $('#' + field + '_' + task.id)
+    slider_id = field + '_slider_' + task.id
     field_element.parent().append('<div class=slider id=' + slider_id + ' />')
     slider_element = $('#' + slider_id)
     slider_element.slider(min:min, max:max, step:step, animate: true, 
@@ -26,5 +26,5 @@ class self.ProjectsIndex
     field_element.keyup()
 
 
-  submit: (project_id) ->
-    $('form_' + project_id).submit
+  submit: (task_id) ->
+    $('form_' + task_id).submit
