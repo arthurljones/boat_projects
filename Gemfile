@@ -17,24 +17,23 @@ gem 'awesome_print'
 gem 'nested_form'
 gem "validates_existence", ">= 0.5.3"
 gem "squeel"
+gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'devise'
 
-group :development do
+group :test, :development do
 	#gem 'mysql2psql'
 	gem 'haml-rails'
 	gem 'nifty-generators'
+	gem 'rspec-rails'
 end
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
