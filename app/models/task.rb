@@ -1,12 +1,12 @@
-class Project < ActiveRecord::Base
+class Task < ActiveRecord::Base
   attr_accessible :completed, :cruising_priority, :daysail_priority, :description, :helpers_needed, :hours_estimate, :liveaboard_priority, :name, :notes, :obsolete, :_destroy 
   attr_accessor :_destroy
 
-  has_many :project_materials, :dependent => :destroy
-  has_many :project_services, :dependent => :destroy
-  has_many :materials, :through => :project_materials
-  has_many :services, :through => :project_services
-  has_many :dependencies, :through => :projects_dependencies, :class_name => 'Project', :foreign_key => 'dependency_id'
+  has_many :task_materials, :dependent => :destroy
+  has_many :task_services, :dependent => :destroy
+  has_many :materials, :through => :task_materials
+  has_many :services, :through => :task_services
+  has_many :dependencies, :through => :tasks_dependencies, :class_name => 'Task', :foreign_key => 'dependency_id'
 
   scope :complete, where{completed == true}
   scope :incomplete, where{completed == false}
@@ -14,14 +14,14 @@ class Project < ActiveRecord::Base
   scope :current, where{obsolete == false}
   scope :active, incomplete.current
 
-  attr_accessible :project_materials_attributes
-  accepts_nested_attributes_for :project_materials, :allow_destroy => true
+  attr_accessible :task_materials_attributes
+  accepts_nested_attributes_for :task_materials, :allow_destroy => true
 
-  attr_accessible :project_services_attributes
-  accepts_nested_attributes_for :project_services, :allow_destroy => true
+  attr_accessible :task_services_attributes
+  accepts_nested_attributes_for :task_services, :allow_destroy => true
 
   def cost
-    cost = project_materials.map(&:cost).inject(:+)
+    cost = task_materials.map(&:cost).inject(:+)
     return cost || 0
   end
 

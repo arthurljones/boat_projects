@@ -1,4 +1,4 @@
-= nested_form_for @project do |f|
+= nested_form_for @task do |f|
   .row-fluid
     .span4
       .control-group
@@ -55,7 +55,7 @@
             %th{:width => "10%"}= "Cost"
             %th{:width => "10%"}= "Actions"
         %tbody
-          = f.fields_for :project_materials do |material|
+          = f.fields_for :task_materials do |material|
             %tr
               %td
                 - if material.object.material_id.present?
@@ -66,8 +66,8 @@
               %td= material.text_field :quantity, :class => "input-mini"
               %td= number_to_currency(material.object.cost)
               %td= f.link_to_remove "Remove"
-  = f.link_to_add "Add a Material", :project_materials
+  = f.link_to_add "Add a Material", :task_materials
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), projects_path, :class => 'btn'
-    = link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), tasks_path, :class => 'btn'
+    = link_to t('.new', :default => t("helpers.links.new")), new_task_path, :class => 'btn btn-primary'

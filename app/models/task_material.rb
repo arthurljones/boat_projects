@@ -1,9 +1,9 @@
-class ProjectMaterial < ActiveRecord::Base
-  attr_accessible :material_id, :project_id, :quantity
+class TaskMaterial < ActiveRecord::Base
+  attr_accessible :material_id, :task_id, :quantity
 
   validates :quantity, :numericality => true
 
-  belongs_to :project
+  belongs_to :task
   belongs_to :material
 
   def cost
