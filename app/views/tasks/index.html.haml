@@ -3,32 +3,38 @@
   %h1=t '.title', :default => model_class.model_name.human.pluralize
   = link_to t('.new', :default => t("helpers.links.new")), new_task_path, :class => 'btn btn-primary'
 ="Total Cost: #{number_to_currency @unsorted_tasks.cost}"
-%table.table.table-hover
-  %thead
-    %tr
-      %th= sortable model_class, :name
-      %th= sortable model_class, :cost
-      %th= sortable model_class, :hours_estimate
-      %th= sortable model_class, :helpers_needed
-      %th= sortable model_class, :liveaboard_priority
-      %th= sortable model_class, :daysail_priority
-      %th= sortable model_class, :cruising_priority
-  %tbody
-    - @tasks.each do |task|
-      =form_for task, :remote => true, :id => "form_#{task.id}" do |task_fields|
-        %tr
-          %td= link_to task.name, edit_task_path(task)
-          %td= number_to_currency task.cost
-          %td.hours-slider-container
+%div
+  .table-row
+    .span2= sortable model_class, :name
+    .span1= sortable model_class, :cost
+    .span2= sortable model_class, :hours_estimate
+    .span7
+      .span3= sortable model_class, :helpers_needed
+      .span3= sortable model_class, :liveaboard_priority
+      .span3= sortable model_class, :daysail_priority
+      .span3= sortable model_class, :cruising_priority
+
+  - @tasks.each do |task|
+    =form_for task, :remote => true, :id => "form_#{task.id}" do |task_fields|
+      .table-row
+        %div
+          .span2
+            %b= link_to_function task.name, "window.ti.toggleEdit(#{task.id})"
+          .span1= number_to_currency task.cost
+          .span2.hours-slider-container
             =task_fields.number_field :hours_estimate, { :id => "hours_#{task.id}", :class => "hours_field" }
-          %td.priority-slider-container
-            = task_fields.number_field :helpers_needed, { :id => "helpers_#{task.id}", :class => "priority_field" }
-          %td.priority-slider-container
-            = task_fields.number_field :liveaboard_priority, { :id => "liveaboard_#{task.id}", :class => "priority_field" }
-          %td.priority-slider-container
-            = task_fields.number_field :daysail_priority, { :id => "daysail_#{task.id}", :class => "priority_field" }
-          %td.priority-slider-container
-            = task_fields.number_field :cruising_priority, { :id => "cruising_#{task.id}", :class => "priority_field" }
+          .span7
+            .span3.priority-slider-container
+              = task_fields.number_field :helpers_needed, { :id => "helpers_#{task.id}", :class => "priority_field" }
+            .span3.priority-slider-container
+              = task_fields.number_field :liveaboard_priority, { :id => "liveaboard_#{task.id}", :class => "priority_field" }
+            .span3.priority-slider-container
+              = task_fields.number_field :daysail_priority, { :id => "daysail_#{task.id}", :class => "priority_field" }
+            .span3.priority-slider-container
+              = task_fields.number_field :cruising_priority, { :id => "cruising_#{task.id}", :class => "priority_field" }
+        .edit-container{:id => "edit_#{task.id}"}
+
+
 
 = link_to t('.new', :default => t("helpers.links.new")), new_task_path, :class => 'btn btn-primary'
 

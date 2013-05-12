@@ -36,6 +36,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+    render :partial => "form"
   end
 
   def create

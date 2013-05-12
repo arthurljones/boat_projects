@@ -1,73 +1,51 @@
-= nested_form_for @task do |f|
-  .row-fluid
-    .span4
+= nested_form_for @task do |task_fields|
+  %div
+    .span6
       .control-group
-        = f.label :name, :class => 'control-label'
+        = task_fields.label :name, :class => 'control-label'
         .controls
-          = f.text_field :name, :class => 'text_field span12'
+          = task_fields.text_field :name, :class => 'text_field span12'
       .control-group
-        = f.label :description, :class => 'control-label'
+        = task_fields.label :description, :class => 'control-label'
         .controls
-          = f.text_area :description, :rows => 5, :class => 'text_field span12'
-    .span4
+          = task_fields.text_area :description, :rows => 3, :class => 'text_field span12'
+    .span6
       .control-group
-        = f.label :notes, :class => 'control-label'
+        = task_fields.label :notes, :class => 'control-label'
         .controls
-          = f.text_area :notes, :rows => 6, :class => 'text_field span12'
+          = task_fields.text_area :notes, :rows => 4, :class => 'text_field span12'
       .row-fluid
-        .span4
-          = f.label :completed, :class => 'control-label'
         .span2
-          = f.check_box :completed, :class => 'check_box'
-        .span4
-          = f.label :obsolete, :class => 'control-label'
+          = task_fields.label :completed, :class => 'control-label'
+        .span1
+          = task_fields.check_box :completed, :class => 'check_box'
         .span2
-          = f.check_box :obsolete, :class => 'check_box'
+          = task_fields.label :obsolete, :class => 'control-label'
+        .span1
+          = task_fields.check_box :obsolete, :class => 'check_box'
     .span4
-      .form-horizontal
-        .control-group
-          = f.label :hours_estimate, :class => 'control-label'
-          .controls
-            = f.number_field :hours_estimate, :class => 'number_field span6'
-        .control-group
-          = f.label :helpers_needed, :class => 'control-label'
-          .controls
-            = f.number_field :helpers_needed, :class => 'number_field span6'
-        .control-group
-          = f.label :liveaboard_priority, :class => 'control-label'
-          .controls
-            = f.number_field :liveaboard_priority, :class => 'number_field span6'
-        .control-group
-          = f.label :daysail_priority, :class => 'control-label'
-          .controls
-            = f.number_field :daysail_priority, :class => 'number_field span6'
-        .control-group
-          = f.label :cruising_priority, :class => 'control-label'
-          .controls
-            = f.number_field :cruising_priority, :class => 'number_field span6'
-  .row-fluid
-    .span12 
-      %table.table.table-striped
-        %thead
-          %tr
-            %th{:width => "70%"}= "Material"
-            %th{:width => "10%"}= "Quantity"
-            %th{:width => "10%"}= "Cost"
-            %th{:width => "10%"}= "Actions"
-        %tbody
-          = f.fields_for :task_materials do |material|
-            %tr
-              %td
-                - if material.object.material_id.present?
-                  =link_to edit_material_path(material.object.material_id) do
-                    %i{:class=>"icon-hand-right"}
-                =material.select :material_id, options_from_collection_for_select(Material.all.sort_by { |e| e.name }, :id, :name, :selected => material.object.material_id), {:prompt => 'Select Material'}, {:class => "input-xxlarge"}
-                
-              %td= material.text_field :quantity, :class => "input-mini"
-              %td= number_to_currency(material.object.cost)
-              %td= f.link_to_remove "Remove"
-  = f.link_to_add "Add a Material", :task_materials
+  %div
+    .table-row
+      .span9= "Material"
+      .span1= "Quantity"
+      .span1= "Cost"
+      .span1= "Actions"
+    .table-row
+      = task_fields.fields_for :task_materials do |task_material_fields|
+        -task_material = task_material_fields.object
+        -material_id = task_material.material_id
+        -next if task_material.blank? or task_material.material_id.blank?
+        .span9
+          .span11
+            =task_material_fields.select :material_id, materials_for_select(material_id), :prompt => 'Select Material', :class => "select"
+          .span1
+            =link_to edit_material_path(material_id) do
+              %i{:class=>"icon-hand-right"}
+        .span1= task_material_fields.text_field :quantity, :class => "input-mini"
+        .span1= number_to_currency(task_material.cost)
+        .span1= task_material_fields.link_to_remove "Remove"
+  = task_fields.link_to_add "Add a Material", :task_materials
   .form-actions
-    = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), tasks_path, :class => 'btn'
+    = task_fields.submit nil, :class => 'btn btn-primary'
+    = link_to_function "Cancel", "ti.toggleEdit(#{@task.id})", :class => 'btn'
     = link_to t('.new', :default => t("helpers.links.new")), new_task_path, :class => 'btn btn-primary'

@@ -14,6 +14,13 @@
   width: 180px;
 }
 
+.table-row {
+  display: inline-block;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  width: 100%
+}
+
 .slider {  
   display: inline-block;
   width: 50%;
@@ -32,4 +39,17 @@
 .hours_field {
   @include slider_field;
   width: 48px;
+}
+
+.edit-container {
+  display: none;
+}
+
+.spinner {
+  margin-left: 12px;
+  margin-top: 8px;
+}
+
+select {
+ width: 100%;
 }
