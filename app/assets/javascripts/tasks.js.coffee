@@ -1,4 +1,4 @@
-class self.tasksIndex
+class self.TasksIndex
   constructor: (@tasks) ->
     for task in tasks
       @addSlider(task, 'hours', 0, 7, 0.01, true)
