@@ -13,10 +13,10 @@
       = sortable model_class, :hours_estimate
 
   - @tasks.each do |task|
-    .row
+    .row{"data-task-edit-toggle" => task.id}
       =form_for task, :remote => true, :id => "form_#{task.id}" do |task_fields|
         .col-xs-4
-          %b= link_to task.name, "#", "data-task-edit-toggle" => task.id
+          %b= task.name
         .col-xs-4
           = number_to_currency task.cost
         .col-xs-4

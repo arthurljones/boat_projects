@@ -2,14 +2,16 @@ jQuery ->
 
   #Task Editor Dropdown
   editorToggleTag = "task-edit-toggle"
-  editorAreaTag = "task-edit-area"
   $(document).on "click", "[data-#{editorToggleTag}]", (event) ->
     id = $(@).data(editorToggleTag)
-    editor = $("[data-#{editorAreaTag}=#{id}]")
+    lineItem = $("[task-line-item=#{id}]")
+    editor = $("[data-task-edit-area=#{id}]")
     if editor.is(':hidden') or editor.is(':empty')
+      lineItem.slideUp()
       editor.hide()
       editor.load('/tasks/' + id + '/edit', (-> $(@).slideDown()))
     else
+      lineItem.slideDown()
       editor.slideUp(-> $(@).empty())
 
   #Auto-submitters
