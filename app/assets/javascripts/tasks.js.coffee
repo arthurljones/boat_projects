@@ -7,9 +7,10 @@ jQuery ->
     id = $(@).data(editorToggleTag)
     editor = $("[data-#{editorAreaTag}=#{id}]")
     if editor.is(':hidden') or editor.is(':empty')
+      editor.hide()
       editor.load('/tasks/' + id + '/edit', (-> $(@).slideDown()))
     else
-      editor.slideUp(-> $(@).remove())
+      editor.slideUp(-> $(@).empty())
 
   #Auto-submitters
   $(document).on "change", "[data-submit-on-change]", (event) ->
