@@ -1,5 +1,5 @@
 class Material < ActiveRecord::Base
-  attr_accessible :description, :dimensions, :inventory, :location, :material, :minimum_purchase, :package_count, :price, :shipping_price, :category, :units
+  #attr_accessible :description, :dimensions, :inventory, :location, :material, :minimum_purchase, :package_count, :price, :shipping_price, :category, :units
 
   has_many :task_materials
   has_many :tasks, :through => :task_materials

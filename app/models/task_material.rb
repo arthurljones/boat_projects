@@ -1,5 +1,5 @@
 class TaskMaterial < ActiveRecord::Base
-  attr_accessible :material_id, :task_id, :quantity
+  #attr_accessible :material_id, :task_id, :quantity
 
   validates :quantity, :numericality => true
 

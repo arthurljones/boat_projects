@@ -1,39 +1,26 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails', '~> 4.0'
 
 gem 'pg'
 gem 'haml'
-gem 'paperclip'
-gem 'json'
-gem 'therubyracer'
-gem 'twitter-bootstrap-rails'
-gem 'less-rails'
 gem 'foreigner'
 gem 'awesome_print'
-gem 'nested_form'
-gem "validates_existence", ">= 0.5.3"
 gem "squeel"
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'thin' #Lighter web server than WEBrick
 gem 'devise'
 
 group :test, :development do
-	#gem 'mysql2psql'
 	gem 'haml-rails'
-	gem 'nifty-generators'
 	gem 'rspec-rails'
+  gem 'quiet_assets', :group => :development
+
 end
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
 end
 
-
-# To use debugger
-# gem 'debugger'
