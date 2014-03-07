@@ -10,17 +10,18 @@ gem "squeel"
 gem 'jquery-rails'
 gem 'thin' #Lighter web server than WEBrick
 gem 'devise'
+gem 'nested_form'
+
+gem 'sass-rails', '>= 3.2' # sass-rails needs to be higher than 3.2
+gem 'bootstrap-sass', '~> 3.1.1'
+gem 'coffee-rails'
+gem 'uglifier'
 
 group :test, :development do
 	gem 'haml-rails'
 	gem 'rspec-rails'
-  gem 'quiet_assets', :group => :development
-
+  gem 'quiet_assets'
 end
 
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-end
+
 

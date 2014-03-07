@@ -1,28 +1,23 @@
 - model_class = Task
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize
-  = link_to t('.new', :default => t("helpers.links.new")), new_task_path, :class => 'btn btn-primary'
+  %h1 Tasks
+  = link_to "New Task", new_task_path, :class => 'btn btn-primary'
 ="Total Cost: #{number_to_currency @unsorted_tasks.cost}"
 %table
   %tr
     %th= sortable model_class, :name
     %th= sortable model_class, :cost
     %th= sortable model_class, :hours_estimate
+    %td
 
   - @tasks.each do |task|
     =form_for task, :remote => true, :id => "form_#{task.id}" do |task_fields|
       %tr
         %td
-          %b= link_to_function task.name, "window.ti.toggleEdit(#{task.id})"
+          %b= link_to task.name, "#", "data-task-edit-toggle" => task.id
         %td= number_to_currency task.cost
         %td.hours-slider-container
-          =task_fields.number_field :hours_estimate, { :id => "hours_#{task.id}", :class => "hours_field" }
-        .edit-container{:id => "edit_#{task.id}"}
+          =task_fields.number_field :hours_estimate, { :class => "hours_field" }
+        %td{"data-task-edit-area" => task.id}
 
-
-
-= link_to t('.new', :default => t("helpers.links.new")), new_task_path, :class => 'btn btn-primary'
-
-:coffeescript
-  jQuery ->
-    window.ti = new TasksIndex()
+= link_to "New Task", new_task_path, :class => 'btn btn-primary'
