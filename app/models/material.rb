@@ -5,7 +5,7 @@ class Material < ActiveRecord::Base
   has_many :tasks, :through => :task_materials
 
   def name
-  	name = ""
+  	name = []
 
   	name << category unless category.blank?
   	name << ", #{description}" unless description.blank?
@@ -15,7 +15,7 @@ class Material < ActiveRecord::Base
   	name << ", #{stripZeroes minimum_purchase} min" unless minimum_purchase.blank? or minimum_purchase <= 1
   	name << ", #{stripZeroes inventory} avail" unless inventory.blank? or inventory <= 0
 
-  	return name
+  	name.join("")
   end
 
   private

@@ -10,10 +10,10 @@
     = stylesheet_link_tag "application", :media => "all"
 
   %body
-    %ul.nav
-      %li= link_to "Tasks", tasks_path
-      %li= link_to "Materials", materials_path
+    .container{:width => "80%"}
+      %ul.nav.nav-pills
+        %li= link_to "Tasks", tasks_path
+        %li= link_to "Materials", materials_path
 
-    .container-fluid
       = yield
 

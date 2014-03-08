@@ -1,5 +1,4 @@
 jQuery ->
-
   #Task Editor Dropdown
   editorToggleTag = "task-edit-toggle"
   $(document).on "click", "[data-#{editorToggleTag}]", (event) ->
@@ -9,10 +8,23 @@ jQuery ->
     if editor.is(':hidden') or editor.is(':empty')
       lineItem.slideUp()
       editor.hide()
-      editor.load('/tasks/' + id + '/edit', (-> $(@).slideDown()))
+      editor.load('/tasks/' + id + '/edit', ->
+        $(document).trigger("tasks:setupMaterialsSelects")
+        $(@).slideDown())
     else
       lineItem.slideDown()
       editor.slideUp(-> $(@).empty())
+
+  #Client-cloned materials select fields
+  selectSource = $("[data-materials-select-source]>select").first()
+  console.log selectSource
+  selectTargetTag = "materials-select-target"
+  $(document).on "tasks:setupMaterialsSelects", (event) ->
+    $("[data-#{selectTargetTag}]:not(:has(>select))").each ->
+      target = $(@)
+      selected = target.data(selectTargetTag)
+      target.empty()
+      selectSource.clone().val(selected).appendTo(target)
 
   #Auto-submitters
   $(document).on "change", "[data-submit-on-change]", (event) ->

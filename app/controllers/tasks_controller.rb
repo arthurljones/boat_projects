@@ -7,8 +7,7 @@ class TasksController < ApplicationController
     session[:sort] = Task.sortable_by?(sort_column) ? sort_column : "name"
 
     session[:desc] = (params[:desc] == "true") if params[:desc].present?
-    @tasks = @tasks.active.includes{[task_materials, task_materials.material, task_services, task_services.service]}
-    @tasks = @tasks.sorted_by(session[:sort], session[:desc])
+    @tasks = @tasks.active.sorted_by(session[:sort], session[:desc])
 
     respond_to do |format|
       format.html 
@@ -78,7 +77,7 @@ private
   end
 
   def load_resource
-    @tasks = Task.all
+    @tasks = Task.all.includes{[task_materials, task_materials.material, task_services, task_services.service]}
     if %w(new create).include?(action_name)
       @task = @tasks.new
     else

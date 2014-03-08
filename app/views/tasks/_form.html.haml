@@ -1,5 +1,5 @@
 = nested_form_for @task do |task_fields|
-  .container
+  .row
     .col-xs-6
       = task_fields.text_field :name, :class => 'text_field', :placeholder => "Name"
       %br
@@ -17,29 +17,35 @@
           = task_fields.check_box :obsolete, :class => 'check_box'
     .col-xs-4
   %div
-    .table-row
-      .col-xs-8= "Material"
-      .col-xs-1= "Quantity"
-      .col-xs-1= "Cost"
-      .col-xs-1= "Actions"
-    .table-row
+    .row
+      .col-xs-8
+        %h5= "Material"
+      .col-xs-1
+        %h5= "Quantity"
+      .col-xs-1
+        %h5= "Cost"
+      .col-xs-2
+    .row
       = task_fields.fields_for :task_materials do |task_material_fields|
         -task_material = task_material_fields.object
-        -material_id = task_material.material_id
-        -next if task_material.blank? or task_material.material_id.blank?
+        -material = task_material.material
+        -next unless material.present?
         .col-xs-8.container
           .col-xs-11
-            =task_material_fields.select :material_id, materials_for_select(material_id), :prompt => 'Select Material', :class => "select"
+            =materials_picker(task_material_fields, material)
           .col-xs-1
-            =link_to edit_material_path(material_id) do
+            =link_to edit_material_path(material) do
               %span.glyphicon.glyphicon-hand-right
         .col-xs-1= task_material_fields.text_field :quantity, :class => "input-mini"
         .col-xs-1= number_to_currency(task_material.cost)
         .col-xs-1= task_material_fields.link_to_remove "Remove"
-  = task_fields.link_to_add "Add a Material", :task_materials
-  .form-actions
-    = task_fields.submit nil, :class => 'btn btn-primary'
-    = link_to_function "Cancel", "#", :class => 'btn', "data-task-edit-toggle" => @task.id
-    = link_to t('.new', :default => t("helpers.links.new")), new_task_path, :class => 'btn btn-primary'
+  .row
+    .col-xs-2
+      =task_fields.link_to_add "Add a Material", :task_materials
+  %br
+  .row
+    .col-xs-11
+      .form-actions.pull-right
+        = task_fields.submit nil, :class => 'btn btn-success'
   %br
   %br
