@@ -18,13 +18,9 @@
       %h2= sortable model_class, :hours_estimate, "Hours"
 
   - @tasks.each do |task|
-    .row.task-row.item_row{"data-task-edit-toggle" => task.id, :class => cycle("even", "odd")}
-      .col-xs-4
-        %h4= task.name
-      .col-xs-4.align-right
-        %h4= number_to_currency task.cost
-      .col-xs-4
-        %h4= task.hours_estimate
-    .row{"data-task-edit-area" => task.id}
+    -cycle_class = cycle("even", "odd")
+    .row.task-row{"data-task-row" => task.id, :class => cycle_class}
+      =render :partial => "row", :locals => { :task => task }
+    .row{"data-task-edit-area" => task.id, :class => cycle_class}
 
 = link_to "New Task", new_task_path, :class => 'btn btn-primary'

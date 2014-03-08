@@ -1,7 +1,7 @@
-.task-row.even {
+.row.even {
 }
 
-.task-row.odd {
+.row.odd {
   background-color: #cdeff4;
 }
 
@@ -11,12 +11,13 @@
   cursor: pointer;
 }
 
-.priority_field {
-  width: 20px;
-}
-
 .hours_field {
   width: 48px;
+}
+
+.quantity-field {
+  width: 100%;
+  text-align: right;
 }
 
 .edit-container {

@@ -1,4 +1,5 @@
-= nested_form_for @task do |task_fields|
+= nested_form_for @task, :remote => true, "data-task-form" => @task.id do |task_fields|
+  .row.hidden{"data-errors" => true}
   .row
     .col-xs-6
       = task_fields.text_field :name, :class => 'text_field', :placeholder => "Name"
@@ -24,20 +25,22 @@
         %h5= "Quantity"
       .col-xs-1
         %h5= "Cost"
-      .col-xs-2
+      .col-xs-1
     .row
       = task_fields.fields_for :task_materials do |task_material_fields|
         -task_material = task_material_fields.object
         -material = task_material.material
         -next unless material.present?
-        .col-xs-8.container
-          .col-xs-11
-            =materials_picker(task_material_fields, material)
-          .col-xs-1
-            =link_to edit_material_path(material) do
-              %span.glyphicon.glyphicon-hand-right
-        .col-xs-1= task_material_fields.text_field :quantity, :class => "input-mini"
-        .col-xs-1= number_to_currency(task_material.cost)
+        .col-xs-8
+          .row
+            .col-xs-11
+              =materials_picker(task_material_fields, material)
+            .col-xs-1
+              =link_to edit_material_path(material) do
+                %span.glyphicon.glyphicon-hand-right
+        .col-xs-1= task_material_fields.text_field :quantity, :class => "quantity-field"
+        .col-xs-1
+          .quantity-field= number_to_currency(task_material.cost)
         .col-xs-1= task_material_fields.link_to_remove "Remove"
   .row
     .col-xs-2

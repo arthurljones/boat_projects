@@ -23,6 +23,10 @@ class TasksController < ApplicationController
     render :action => "edit"
   end
 
+  def row
+    render :partial => "row", :locals => { :task => @task }
+  end
+
   def new
     respond_to do |format|
       format.html 
@@ -71,7 +75,7 @@ private
   def task_params
     params.require(:task).permit(
       :completed, :description, :helpers_needed, :hours_estimate,:name, :notes, :obsolete, :_destroy,
-      :task_materials_attributes => [:id, :material_id, :_destroy],
+      :task_materials_attributes => [:id, :material_id, :quantity, :_destroy],
       :task_services_attributes => [:id, :service_id, :_destroy]
     )
   end
