@@ -1,11 +1,10 @@
 class Material < ActiveRecord::Base
   #attr_accessible :description, :dimensions, :inventory, :location, :material, :minimum_purchase, :package_count, :price, :shipping_price, :category, :units
 
-  has_many :task_materials
+  has_many :task_materials, :inverse_of => :material
   has_many :tasks, :through => :task_materials
 
   def name
-
   	name = ""
 
   	name << category unless category.blank?

@@ -15,7 +15,7 @@ module QueryTrace
 
   def log_info_with_trace(event)
     log_info_without_trace(event)
-    trace_logs = Rails.backtrace_cleaner.clean(caller).first(1)
+    trace_logs = Rails.backtrace_cleaner.clean(caller).first(10)
     if event.payload[:name] != 'SCHEMA'
       trace_logs.each do |trace_log|
         logger.debug("   \\_ \e[33mCalled from:\e[0m " + trace_log)

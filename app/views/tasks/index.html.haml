@@ -1,26 +1,29 @@
 - model_class = Task
-.page-header
-  %h1 Tasks
-  = link_to "New Task", new_task_path, :class => 'btn btn-primary'
-="Total Cost: #{number_to_currency @unsorted_tasks.cost}"
-.container-fluid
+.container{:width => "60%"}
   .row
     .col-xs-4
-      = sortable model_class, :name
+      %h1 Tasks
     .col-xs-4
-      = sortable model_class, :cost
+      %h3="Total Cost: #{number_to_currency @tasks.sum(&:cost)}"
     .col-xs-4
-      = sortable model_class, :hours_estimate
+      .pull-right= link_to "New Task", new_task_path, :class => 'btn btn-primary'
+
+  .row
+    .col-xs-4
+      %h2= sortable model_class, :name
+    .col-xs-4
+      %h2= sortable model_class, :cost
+    .col-xs-4
+      %h2= sortable model_class, :hours_estimate
 
   - @tasks.each do |task|
-    .row{"data-task-edit-toggle" => task.id}
-      =form_for task, :remote => true, :id => "form_#{task.id}" do |task_fields|
-        .col-xs-4
-          %b= task.name
-        .col-xs-4
-          = number_to_currency task.cost
-        .col-xs-4
-          =task_fields.number_field :hours_estimate, { :class => "hours_field" }
+    .row.task-row.item_row{"data-task-edit-toggle" => task.id, :class => cycle("even", "odd")}
+      .col-xs-4
+        %h4= task.name
+      .col-xs-4.align-right
+        %h4= number_to_currency task.cost
+      .col-xs-4
+        %h4= task.hours_estimate
     .row{"data-task-edit-area" => task.id}
 
 = link_to "New Task", new_task_path, :class => 'btn btn-primary'

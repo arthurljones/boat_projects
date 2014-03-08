@@ -1,13 +1,14 @@
 class TasksController < ApplicationController
-  # GET /tasks
-  # GET /tasks.json
+
+  before_action :load_resource
+
   def index
     sort_column = params[:sort] || session[:sort]
     session[:sort] = Task.sortable_by?(sort_column) ? sort_column : "name"
 
     session[:desc] = (params[:desc] == "true") if params[:desc].present?
-    @unsorted_tasks = Task.active.includes(:materials, :services)
-    @tasks = @unsorted_tasks.sorted_by(session[:sort], session[:desc])
+    @tasks = @tasks.active.includes{[task_materials, task_materials.material, task_services, task_services.service]}
+    @tasks = @tasks.sorted_by(session[:sort], session[:desc])
 
     respond_to do |format|
       format.html 
@@ -16,8 +17,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
-
     respond_to do |format|
       format.html 
       format.json { render json: @task }
@@ -26,8 +25,6 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
-
     respond_to do |format|
       format.html 
       format.json { render json: @task }
@@ -35,7 +32,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
     render :partial => "form"
   end
 
@@ -52,25 +48,43 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
-
     respond_to do |format|
-      if @task.update_attributes(params[:task])
-        format.html { redirect_to edit_task_path(@task), notice: 'Task was successfully updated.' }
-      else
-        format.html { render action: "edit" }
+      format.html do
+        if @task.update_attributes(task_params)
+          redirect_to(edit_task_path(@task), notice: 'Task was successfully updated.')
+        else
+          render action: "edit"
+        end
       end
     end
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
-
     respond_to do |format|
       format.html { redirect_to tasks_url }
       format.json { head :no_content }
     end
+  end
+
+private
+
+  def task_params
+    params.require(:task).permit(
+      :completed, :description, :helpers_needed, :hours_estimate,:name, :notes, :obsolete, :_destroy,
+      :task_materials_attributes => [:id, :material_id, :_destroy],
+      :task_services_attributes => [:id, :service_id, :_destroy]
+    )
+  end
+
+  def load_resource
+    @tasks = Task.all
+    if %w(new create).include?(action_name)
+      @task = @tasks.new
+    else
+      @task = @tasks.find(params[:id]) if params[:id].present?
+    end
+
   end
 
 end

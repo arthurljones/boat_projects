@@ -26,6 +26,6 @@ BoatProjects::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-
-
 end
+
+QueryTrace.enable #Enable line numbers for DB query logs (slow)

@@ -1,8 +1,14 @@
-.table-row {
-  display: inline-block;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  width: 100%
+.task-row.even {
+}
+
+.task-row.odd {
+  background-color: #cdeff4;
+}
+
+.task-row:hover
+{
+  background-color: #bde8bd;
+  cursor: pointer;
 }
 
 .priority_field {
