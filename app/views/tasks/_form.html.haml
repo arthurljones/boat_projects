@@ -4,7 +4,7 @@
     .col-xs-6
       = task_fields.text_field :name, :class => 'text_field', :placeholder => "Name"
       %br
-      = task_fields.text_area :description, :rows => 3, :class => 'text_field', :placeholder => "Description"
+      = task_fields.text_area :description, :rows => 3, :class => 'text_field', :placeholder => "Description", :style => "width:100%"
     .col-xs-6
       = task_fields.text_area :notes, :rows => 4, :class => 'text_field span12', :placeholder => "Notes"
       .row
